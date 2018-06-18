@@ -1,0 +1,72 @@
+@font-face{
+	font-family:Adam-CG;
+	src:url('../fonts/ADAM.CG PRO.woff');
+}
+
+.header-color{
+	background-color: #8EAEBD !important;
+}
+
+.card-head-color{
+	background-color: #C7A16D !important;
+}
+
+.name-div{
+	position: relative;
+	padding-top: 25px;
+	padding-left: 5px;
+	font-family:Adam-CG;
+}
+
+.menu-div{
+	text-align: right;
+}
+
+.content-div{
+	margin-left: 50px; 
+	margin-top: 20px;
+}
+
+.image-div{
+	padding-right: 0px;
+}
+
+.circle-border{
+	border-radius: 50%;
+	border: 5px black solid;
+	height: 120px;
+	width: 120px;
+}
+
+.circle-border:hover{
+	background-color: rgba(74,202,252,1);
+}
+
+.friend-box{
+	margin: 50px 0px;
+	background-color: #8EAEBD !important;
+	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+}
+
+@media only screen and (max-width: 600px){
+
+	.name-div{
+		position: relative;
+		padding-top: 25px;
+		padding-left: 0px;
+		text-align: center;
+	}
+	.image-div{
+		padding-left: 0px;
+	}
+
+	.tab-title{
+		width: 80%;
+	}
+
+	.menu-div{
+		width: 20%;
+	}
+
+}
