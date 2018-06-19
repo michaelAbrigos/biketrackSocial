@@ -1,8 +1,7 @@
 @extends('Layouts.master')
 @section('content')
 <div class="container">
-    <br>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center login-top">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header header-color font-adam">{{ __('Login') }}</div>

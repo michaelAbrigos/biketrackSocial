@@ -3,16 +3,19 @@
 	src:url('../fonts/ADAM.CG PRO.woff');
 }
 
+nav{
+	z-index: 11 !important;
+}
 .nav-color{
-	background-color: #031424;
+	background-color: #8EAEBD !important; /* light blue color */
 }
 
 .header-color{
-	background-color: #8EAEBD !important;
+	background-color: #f67a00 !important; /* orange color */
 }
 
 .card-head-color{
-	background-color: #C7A16D !important;
+	background-color: #C7A16D !important; /* light brown color */
 }
 
 #eye:hover{
@@ -24,6 +27,7 @@
 	padding-top: 25px;
 	padding-left: 5px;
 	font-family:Adam-CG;
+	margin-left: 20px;
 }
 
 .font-adam{
@@ -43,31 +47,71 @@
 	padding-right: 0px;
 }
 
-.circle-border{
-	border-radius: 50%;
-	border: 5px black solid;
-	height: 120px;
-	width: 120px;
+.login-top{
+	margin-top: 150px; /* margin of login-form */
+}
+.register-top{
+	margin-top: 100px; /* margin of register-form */
 }
 
-.circle-border:hover{
-	background-color: rgba(74,202,252,1);
-}
 
 .friend-box{
 	margin: 50px 0px;
 	background-color: #8EAEBD !important;
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
 }
 
-@media only screen and (max-width: 600px){
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 10; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #f1f1f1;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 70px;
+}
 
+/* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #959595;
+    cursor: pointer;
+}
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+    top: 70px;
+    position: relative;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+
+@media only screen and (max-width: 600px){
+	.sidenav {display: none;}
+	.main {
+	    margin-left: 0px; /* Same as the width of the sidebar */
+	    padding: 0px 10px;
+	}
+    .sidenav a {font-size: 18px;}
+	
 	.name-div{
 		position: relative;
 		padding-top: 25px;
 		padding-left: 0px;
 		text-align: center;
+		margin-left: 0px;
 	}
 	.image-div{
 		padding-left: 0px;

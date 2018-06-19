@@ -1,7 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
-    <br>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center login-top">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header header-color font-adam"><?php echo e(__('Login')); ?></div>
@@ -17,7 +16,7 @@
                                     <span class="invalid-feedback">
                                         <strong><?php echo e($errors->first('email')); ?></strong>
                                     </span>
-                                <?php endif; ?>
+                            <?php endif; ?>
                         </div>
 
                         <div class="form-group">

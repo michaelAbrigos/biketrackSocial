@@ -3,8 +3,7 @@
 
 
 <div class="container">
-    <br><br>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center register-top">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header header-color font-adam">{{ __('Register Account') }}</div>

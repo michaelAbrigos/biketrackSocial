@@ -1,6 +1,6 @@
 <div class="sidenav">
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#clients">Clients</a>
+  <a href="home">News Feed</a>
+  <a href="location">Real Time Map</a>
+  <a href="groups">Groups</a>
   <a href="#contact">Contact</a>
 </div>
