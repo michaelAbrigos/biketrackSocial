@@ -1,5 +1,4 @@
 @extends('Layouts.master')
-@include('Layouts.sidebarMain')
 @section('content')
 
 

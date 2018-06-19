@@ -1,5 +1,4 @@
 @extends('Layouts.master')
-@include('Layouts.sidebarMain')
 @section('content')
 <div class="container">
     <br>
@@ -19,7 +18,7 @@
                                     <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                            @endif
                         </div>
 
                         <div class="form-group">
