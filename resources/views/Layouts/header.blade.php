@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/account.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/snackbar.css')}}">  
     <script type="text/javascript" src="{{asset('js/snackbar.min.js')}}"></script>
+    <link rel="icon" type="text/css" href="{{asset('icons/bts_LMS_icon.ico')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-material-datetimepicker.css')}}">
     
 

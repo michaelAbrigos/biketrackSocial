@@ -112,7 +112,7 @@ $(document).ready(function(){
             data: formData,
             dataType: 'json',
             success: function (data) {
-                var titlefname = '<h3>'+ data.first_name +' '+ data.last_name +'</h3>';
+                var titlefname = '<h3 id="titleFname">'+ data.first_name +' '+ data.last_name +'</h3>';
             	var fname = '<b><p id="p_fname">First Name:</b> '+ data.first_name +'</p>';
             	var lname = '<b><p id="p_lname">Last Name:</b> '+ data.last_name +'</p>';
             	var contact = '<b><p id="p_contact">Contact Number:</b> '+ data.contact_number +'</p>';

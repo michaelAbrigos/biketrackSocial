@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\User_info;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -49,9 +49,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => 'required|string|max:255',
+            'fname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+            'lname' => 'required|string|max:255',
+            'gender' => 'required',
+            'username' => 'required|string|max:255'
         ]);
     }
 
@@ -63,12 +66,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            
-
         ]);
+
+        $userID = $user->id;
+
+        $user_if = User_info::create([
+            'first_name' => $data['fname'],
+            'last_name' => $data['lname'],
+            'gender' => $data['gender'],
+            'user_id' => $userID
+        ]);
+        if ($user_if = true){
+            return $user;    
+        }else{
+            return false;
+        } 
+        
     }
 }

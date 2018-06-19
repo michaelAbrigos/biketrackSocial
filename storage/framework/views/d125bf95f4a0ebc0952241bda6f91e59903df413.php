@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/account.css')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/snackbar.css')); ?>">  
     <script type="text/javascript" src="<?php echo e(asset('js/snackbar.min.js')); ?>"></script>
+    <link rel="icon" type="text/css" href="<?php echo e(asset('icons/bts_LMS_icon.ico')); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/bootstrap-material-datetimepicker.css')); ?>">
     
 

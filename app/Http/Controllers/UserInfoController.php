@@ -23,9 +23,13 @@ class UserInfoController extends Controller
         $devices = Device::whereHas('users', function ($q){
             $q->where('id','=',Auth::id());
         })->get();
-        //dd($devices);
-        $date = date_create($users->birthday);
-        $bday = date_format($date,"M. d, Y");
+        if ($users->birthday == null){
+            $bday = "";
+        }else{
+            $date = date_create($users->birthday);
+            $bday = date_format($date,"M. d, Y"); 
+        }
+        
         return view('CRUD.information.account',compact('users','bday','devices'));
     }
 

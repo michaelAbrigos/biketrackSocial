@@ -7,13 +7,9 @@
   @include('Layouts.sidebar')
   
   <main class="bmd-layout-content">
-    
-    <div class="container">
-      <br>
-      <h1 class="navbar-brand">Real time location</h1>
-    </div>
       
-    <div class="container" style="border: 1px solid gray;height: 400px;margin-top: 20px;">
+    <div class="" style="border-radius:5px;box-shadow: 0 10px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1); height: 540px; margin: 20px;">
       
       <div id="map"></div>
     </div>

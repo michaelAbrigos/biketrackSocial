@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Location;
-use App\User;
-use  Auth;
-use Response;
+
 use Illuminate\Http\Request;
 
-class LocationsController extends Controller
+class GroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        return view('Bike User.real-time-tracking');
+        return view('CRUD.groups.index');
     }
 
     /**
@@ -26,7 +23,7 @@ class LocationsController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -37,12 +34,7 @@ class LocationsController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-        $loc = new Location;
-        $loc->latitude = $request->latitude;
-        $loc->longitude = $request->longitude;
-        $loc->device_id = $request->device_id;
-        $loc->save();
+        //
     }
 
     /**
@@ -88,14 +80,5 @@ class LocationsController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function getLocation()
-    {
-        $user_device = User::with('devices')->where('id','=',Auth::id())->first();
-        $dev_id =  $user_device->devices[0]->id;
-        $location = Location::where('device_id',$dev_id)->orderBy('created_at', 'desc')->get(['latitude','longitude'])->first();
-        //dd($location);
-        return Response::json($location);
     }
 }

@@ -3,6 +3,10 @@
 	src:url('../fonts/ADAM.CG PRO.woff');
 }
 
+.nav-color{
+	background-color: #031424;
+}
+
 .header-color{
 	background-color: #8EAEBD !important;
 }
@@ -11,10 +15,18 @@
 	background-color: #C7A16D !important;
 }
 
+#eye:hover{
+	cursor: pointer;
+}
+
 .name-div{
 	position: relative;
 	padding-top: 25px;
 	padding-left: 5px;
+	font-family:Adam-CG;
+}
+
+.font-adam{
 	font-family:Adam-CG;
 }
 

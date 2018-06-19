@@ -3,9 +3,11 @@ var map;
 var markers = [];
     
 function initMap() {
-var startplace = {lat: 14.560996, lng: 121.046310}
+
+var startplace = {lat: 14.5176, lng: 121.0509}
 var map = new google.maps.Map(
-	document.getElementById('map'), {zoom: 16, center: startplace});
+document.getElementById('map'), {zoom: 16, center: startplace});
+
 $.ajax({
       type:"GET",
       url:"/getLocation",
@@ -13,9 +15,11 @@ $.ajax({
       dataType: 'json',
       success: function(data)
     	{
-	      	var myLocation = {lat: data.latitude, lng: data.longitude};
-			var marker = new google.maps.Marker({position: myLocation, map: map});
-			markers.push(marker);
+        var myLocation = {lat: data.latitude, lng: data.longitude};
+		    var marker = new google.maps.Marker({position: myLocation, map: map});
+			  markers.push(marker);
+        var latLng = marker.getPosition(); // returns LatLng object
+        map.setCenter(latLng)
 		}
 });
 
@@ -30,18 +34,16 @@ setInterval(function()
       dataType: 'json',
       success: function(data)
       {
-      	//console.log(markers);
-      	//gonna change this to /getlocation with user id latest data
       	var myLocation = {lat: data.latitude , lng: data.longitude};
         var marker = new google.maps.Marker({position: myLocation, map: map});
         markers.push(marker);
         marker.setMap(map);
-		      
+		    //console.log(map);  
       }
     });
 
     //intervals for refresh and get request.
-}, 60000);
+}, 10000);
 }
 
   function setMapOnAll(map) {
