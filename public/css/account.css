@@ -54,6 +54,9 @@ nav{
 	margin-top: 100px; /* margin of register-form */
 }
 
+.small-only{
+	display: none;
+}
 
 .friend-box{
 	margin: 50px 0px;
@@ -100,6 +103,11 @@ nav{
 
 @media only screen and (max-width: 600px){
 	.sidenav {display: none;}
+	
+	.small-only{
+		display: block;
+	}
+
 	.main {
 	    margin-left: 0px; /* Same as the width of the sidebar */
 	    padding: 0px 10px;

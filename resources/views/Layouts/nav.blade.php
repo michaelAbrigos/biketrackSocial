@@ -19,6 +19,15 @@
       </ul>
     @else
       <ul class="navbar-nav">
+        <li class="nav-item small-only">
+          <a class="nav-link" href="location">Real Time Location</a>
+        </li>
+        <li class="nav-item small-only">
+          <a class="nav-link" href="groups">Group</a>
+        </li>
+        <li class="nav-item small-only">
+          <a class="nav-link" href="{{route('register')}}">Places</a>
+        </li>
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->username }}</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"">
