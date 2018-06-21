@@ -17,4 +17,13 @@ trait RedirectsUsers
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
+
+    public function redirectPeers()
+    {
+        if (method_exists($this, 'redirectPeer')) {
+            return $this->redirectPeer();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
+    }
 }

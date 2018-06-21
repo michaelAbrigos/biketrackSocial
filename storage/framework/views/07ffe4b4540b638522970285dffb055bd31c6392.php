@@ -80,6 +80,8 @@
 	      			</div>
 	    			</div>
 	  			</div>
+	  			<?php if(auth()->check() && auth()->user()->hasRole('peers')): ?>
+	  			<?php else: ?>
 	  			<div class="card">
 	    			<div class="card-header card-head-color" id="headingThree">
 	      			<h5 class="mb-0">
@@ -105,6 +107,8 @@
 	      			</div>
 	    			</div>
 	  			</div>
+	  			<?php endif; ?>
+
 				</div>
 			</div>
 		</div>

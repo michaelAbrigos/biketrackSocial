@@ -81,6 +81,7 @@ class RegisterController extends Controller
             'user_id' => $userID
         ]);
         if ($user_if = true){
+            $user->assignRole('bike_user');
             return $user;    
         }else{
             return false;

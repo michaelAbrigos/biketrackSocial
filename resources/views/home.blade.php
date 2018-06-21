@@ -3,7 +3,7 @@
 @section('content')
 @include('Layouts.sidebar') 
     <div class="main">
-        <div class="row justify-content-center">
+        <div class="justify-content-center">
             <div class="col-md-10">
                 <br>
                 <div class="card bg-light mb-3">

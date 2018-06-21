@@ -1,7 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
+use App\User_info;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Hash;
+use Response;
+use Auth;
 use Illuminate\Http\Request;
 
 class PeersController extends Controller
@@ -13,7 +19,8 @@ class PeersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::with('information')->role('peers')->where('parent_id',Auth::id())->get();
+        return view('CRUD.users.peerIndex',compact('users'));
     }
 
     /**
@@ -34,7 +41,29 @@ class PeersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'parent_id' => Auth::id()
+        ]);
+
+        $userID = $user->id;
+
+        $user_if = User_info::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'user_id' => $userID
+        ]);
+
+        if ($user_if = true){
+            $user->assignRole('peers');
+            return Response::json($user->information);
+        }else{
+            return Response::json($user);
+        }
     }
 
     /**

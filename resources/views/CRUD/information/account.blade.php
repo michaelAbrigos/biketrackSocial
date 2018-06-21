@@ -82,6 +82,8 @@
 	      			</div>
 	    			</div>
 	  			</div>
+	  			@role('peers')
+	  			@else
 	  			<div class="card">
 	    			<div class="card-header card-head-color" id="headingThree">
 	      			<h5 class="mb-0">
@@ -107,6 +109,8 @@
 	      			</div>
 	    			</div>
 	  			</div>
+	  			@endrole
+
 				</div>
 			</div>
 		</div>

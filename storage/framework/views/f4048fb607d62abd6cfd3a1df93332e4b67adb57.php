@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('Layouts.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
     <div class="main">
-        <div class="row justify-content-center">
+        <div class="justify-content-center">
             <div class="col-md-10">
                 <br>
                 <div class="card bg-light mb-3">

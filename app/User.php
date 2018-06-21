@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password','username'
+        'email', 'password','username','parent_id'
     ];
 
     /**
@@ -29,7 +29,7 @@ class User extends Authenticatable
     ];
 
     public function information(){
-        return $this->belongsTo('App\User_info');
+        return $this->hasOne('App\User_info');
     }
 
     public function devices(){

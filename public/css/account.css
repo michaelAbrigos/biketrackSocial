@@ -81,6 +81,7 @@ nav{
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 16px;
+    font-family: lato;
     color: black;
     display: block;
 }
@@ -99,6 +100,10 @@ nav{
     position: relative;
 }
 
+.small-center{
+	padding-top: 5px;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
 
 @media only screen and (max-width: 600px){
@@ -106,6 +111,10 @@ nav{
 	
 	.small-only{
 		display: block;
+	}
+	.small-center{
+		padding-top: 10px;
+		text-align: center !important;
 	}
 
 	.main {

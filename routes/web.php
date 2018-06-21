@@ -27,5 +27,6 @@ Route::group(['middleware' => 'auth'], function() {
     //will add more device controller for user.
 	Route::resource('/device', 'DeviceController')->only('store');
 	Route::resource('/groups', 'GroupsController')->only('index');
+	Route::resource('/peers', 'PeersController');
 });
 Route::get('/search','UserInfoController@search')->name('search');
