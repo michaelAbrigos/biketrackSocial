@@ -26,7 +26,7 @@ class CreateFriendsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('friend_id');
-            $table->unsignedInteger('relationship_id');
+            $table->boolean('confirmed')->default(0);
             $table->timestamps();
             
             $table->foreign('user_id')
@@ -39,10 +39,6 @@ class CreateFriendsTable extends Migration
                 ->onDelete('no action')
                 ->onUpdate('no action');
 
-            $table->foreign('relationship_id')
-                ->references('id')->on('relationships')
-                ->onDelete('no action')
-                ->onUpdate('no action');
         });
     }
 

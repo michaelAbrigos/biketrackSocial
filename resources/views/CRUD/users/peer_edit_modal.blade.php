@@ -46,7 +46,7 @@
 
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Birthday:</label>
-              <input type="text" class="form-control" id="date-{{$user->id}}">
+              <input type="text" class="form-control date" id="date-{{$user->id}}">
             </div>
         </div>
         <div class="modal-footer">

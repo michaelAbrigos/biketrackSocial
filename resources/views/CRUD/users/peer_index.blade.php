@@ -11,7 +11,7 @@
   	</div>
   	<div class="container" style="padding-top: 10px;">
 		@if(count($users) == 0)
-		<div class="alert alert-secondary" role="alert">
+		<div class="alert alert-secondary" id="noPeer" role="alert">
 		  Looks like you dont have any peers!
 		</div>
 		@else
@@ -21,7 +21,12 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-6">
-								<img src="{{asset('avatars/male1.svg')}}" height="50px;"><p style="display: inline-block;">{{$user->information->first_name}} {{$user->information->last_name}}</p>
+								@if($user->information->gender == "Female")
+								<img src="{{asset('avatars/female.svg')}}" height="50px;">
+								@else
+								<img src="{{asset('avatars/male1.svg')}}" height="50px;">
+								@endif
+								<p style="display: inline-block;">{{$user->information->first_name}} {{$user->information->last_name}}</p>
 							</div>
 							<div class="col-md-6 text-right small-center">
 								<button type="button" class="btn btn-raised btn-success">Permission</button>
@@ -42,4 +47,10 @@
 
 @include('CRUD.users.peer_add_modal')
 @include('Scripts.peerAjax')
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$('.date').bootstrapMaterialDatePicker({maxDate : new Date(), time: false });
+});
+</script>
 @endsection	

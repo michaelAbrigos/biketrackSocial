@@ -13,7 +13,7 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        return view('CRUD.groups.index');
+        return view('CRUD.groups.group_index');
     }
 
     /**

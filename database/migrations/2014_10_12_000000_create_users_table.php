@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('activated')->nullable();
             $table->text('token')->nullable();
+            $table->unsignedInteger('parent_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

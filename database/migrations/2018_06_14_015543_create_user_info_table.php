@@ -37,8 +37,8 @@ class CreateUserInfoTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
-                ->onDelete('no action')
-                ->onUpdate('no action');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

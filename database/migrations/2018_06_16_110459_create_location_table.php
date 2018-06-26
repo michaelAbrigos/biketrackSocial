@@ -29,7 +29,7 @@ class CreateLocationTable extends Migration
             $table->unsignedInteger('device_id');
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('device_id')
                 ->references('id')->on('devices')
                 ->onDelete('no action')
                 ->onUpdate('no action');
