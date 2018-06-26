@@ -1,12 +1,19 @@
 @extends('Layouts.master')
 
 @section('content')
-<div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
-@include('Layouts.sidebar')
-<main>
-<div class="container" style="margin-top: 20px;">
-	<a href="#" data-toggle="modal" id="add-group" data-target="#addGroup">Add groups</a>
-</div>
-</main>
-@include('CRUD.groups.create')
-@endsection
+<meta name="_token" content="{!! csrf_token() !!}" />
+  <div class="main">
+  	<meta name="_token" content="{!! csrf_token() !!}" />
+  	@include('Layouts.sidebar')
+	<div class="row" style="margin-right: 0px !important">
+		<div class="col" style="padding-top: 7px; margin-left: 20px;"><h5 class="font-adam">Group list</h5></div>
+		<div class="col text-right"><button type="button" class="btn btn-raised btn-warning" data-toggle="modal" data-target="#peerAdd">Add Group</button></div>
+  	</div>
+
+  	<div class="container" style="padding-top: 10px;">
+		<div class="alert alert-secondary" role="alert">
+	  		Looks like you don't have any groups!
+		</div>
+	</div>
+  </div>
+ @endsection

@@ -1,22 +1,23 @@
 <script>
 $(document).ready(function(){
 
-	var id = $('#user-id').val();
+    $(document).on("click",'.editModal',function(){
+        var id = $(this).attr('id');
+        var url = 'peers';
 
-	$(document).on("click",'#pi-b',function(){
-		
-		//console.log(id);
-		$.get(url + '/' + id +'/edit', function (data) {
+        $.get(url + '/' + id, function (data) {
             //success data
-            //console.log(data);
-            $('#fname').val(data.first_name);
-            $('#lname').val(data.last_name);
-            $('#contact').val(data.contact_number);
-            $('#address').val(data.home_address);
-            $('#date').val(data.birthday);
-            $('#persoinfo').modal('show');
+            //console.log(data.first_name);
+            $('#fname-'+id).val(data.first_name);
+            $('#lname-'+id).val(data.last_name);
+            $('#contact-'+id).val(data.contact);
+            $('#address-'+id).val(data.address);
+            $('#gender-'+id).val(data.gender).change();
+            $('#date-'+id).val(data.birthday);
+            $('#editPeer-'+id).modal('show');
         }) 
-	});
+
+    });
 
     $(document).on("click",'#addPeer',function(e){
         $.ajaxSetup({
@@ -39,7 +40,7 @@ $(document).ready(function(){
             email: $('#email').val(),
             password: $('#pass').val(),
         }
-        console.log(formData);
+        //console.log(formData);
         
         url = '/peers';
 

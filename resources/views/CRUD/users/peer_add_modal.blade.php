@@ -74,7 +74,7 @@
         </div>
          <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" id="addPeer" class="btn btn-raised btn-success">Add Device</button>
+          <button type="submit" id="addPeer" class="btn btn-raised btn-success">Add Peer</button>
         </div>
       </form>
     </div>

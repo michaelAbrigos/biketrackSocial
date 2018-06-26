@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Response;
 use Auth;
+use App\Http\Resources\Peer as PeerResource;
 use Illuminate\Http\Request;
 
 class PeersController extends Controller
@@ -20,7 +21,7 @@ class PeersController extends Controller
     public function index()
     {
         $users = User::with('information')->role('peers')->where('parent_id',Auth::id())->get();
-        return view('CRUD.users.peerIndex',compact('users'));
+        return view('CRUD.users.peer_index',compact('users'));
     }
 
     /**
@@ -74,7 +75,8 @@ class PeersController extends Controller
      */
     public function show($id)
     {
-        //
+        $peers = User::with('information')->role('peers')->where('id',$id)->firstOrFail();
+        return new PeerResource($peers);
     }
 
     /**
