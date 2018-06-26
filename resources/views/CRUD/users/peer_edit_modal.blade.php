@@ -52,7 +52,7 @@
         <div class="modal-footer">
         	<input type="hidden" id="ui-id-{{$user->id}}" value="{{$user->id}}">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" id="updatePI-{{$user->id}}" class="btn btn-primary">Update</button>
+          <button type="submit" id="updatePI-{{$user->id}}" value="{{$user->id}}" class="btn btn-primary updatePeer">Update</button>
         </div>
       </form>
     </div>

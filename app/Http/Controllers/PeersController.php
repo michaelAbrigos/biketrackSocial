@@ -21,6 +21,7 @@ class PeersController extends Controller
     public function index()
     {
         $users = User::with('information')->role('peers')->where('parent_id',Auth::id())->get();
+        //dd($users);
         return view('CRUD.users.peer_index',compact('users'));
     }
 
@@ -87,7 +88,7 @@ class PeersController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -99,7 +100,19 @@ class PeersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $info = User_info::find($id);
+
+        $info->first_name = $request->first_name;
+        $info->last_name = $request->last_name;
+        $info->gender = $request->gender;
+        $info->contact_number = $request->contact;
+        $info->birthday = $request->birthday;
+        $info->home_address = $request->address;
+        $info->user_id = $id;
+       
+        $info->save();
+
+        return Response::json($info);
     }
 
     /**

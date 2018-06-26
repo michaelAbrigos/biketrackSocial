@@ -19,6 +19,58 @@ $(document).ready(function(){
 
     });
 
+    $(document).on("click",'.updatePeer',function(e){
+        
+        var id = $(this).val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+         e.preventDefault();
+
+        var formData = {
+            first_name: $('#fname-'+id).val(),
+            last_name: $('#lname-'+id).val(),
+            contact: $('#contact-'+id).val(),
+            gender: $('#gender-'+id).find(":selected").text(),
+            address: $('#address-'+id).val(),
+            birthday: $('#date-'+id).val(),
+        }
+
+        url = '/peers/' + id;
+        console.log(formData);
+        $.ajax({
+            type: "PUT",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                var options = {
+                    content: "Peer Information Updated!", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                $('#editPeer-'+id).modal('hide');
+            },
+            error: function(data){
+                console.log(data);
+                var options = {
+                    content: "Seems there is a problem adding a peer", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+            }
+
+        });
+
+    });
+
     $(document).on("click",'#addPeer',function(e){
         $.ajaxSetup({
             headers: {
