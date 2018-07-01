@@ -35,4 +35,8 @@ class User extends Authenticatable
     public function devices(){
         return $this->belongsToMany('App\Device','device_user','user_id','device_id');
     }
+
+    public function groups(){
+        return $this->belongsToMany('App\Group','user_group','user_id','group_id');
+    }
 }

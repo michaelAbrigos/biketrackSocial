@@ -22,7 +22,7 @@ class Peer extends JsonResource
             'contact' => $this->information->contact_number,
             'gender' => $this->information->gender,
             'address' => $this->information->home_address,
-            'birthday' => $this->information->birthday
+            'birthday' => $this->information->birthday,
         ];
     }
 }

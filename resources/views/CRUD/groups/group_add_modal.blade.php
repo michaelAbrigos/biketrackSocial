@@ -11,12 +11,17 @@
 	      <div class="modal-body">
 	      
 			<div class="form-group">
-	            <label for="username" class="col-form-label">Group Name</label>
+	            <label for="gname" class="bmd-label-floating">Group Name</label>
 	            <input type="text" class="form-control" required id="gname">
+          	</div>
+
+          	<div class="form-group">
+	            <label for="desc" class="bmd-label-floating">Description</label>
+	            <input type="text" class="form-control" required id="desc">
           	</div>
 		
 		 	<div class="form-group">
-	            <label for="email" class="col-form-label">Add Members</label>
+	            <label for="email" class="bmd-label-floating">Add Members</label>
 	            <input type="email" class="form-control" required id="members">
         	</div>
 	        		

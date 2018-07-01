@@ -7,6 +7,9 @@ use Auth;
 use Input;
 use Response;
 use Validator;
+use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class UserInfoController extends Controller
@@ -132,11 +135,11 @@ class UserInfoController extends Controller
         
         $searchTerm = Input::get('searchterm');
         
-        $users = User_info::with('user')->whereHas('user', function ($q) use($searchTerm){
+        $users = User::with('information')->where('parent_id',NULL)->wherehas('information', function ($q) use($searchTerm){
             $q->where('first_name','LIKE','%'.$searchTerm.'%')->orWhere('last_name','LIKE','%'.$searchTerm.'%')->orWhere('username','LIKE','%'.$searchTerm.'%');
         })->get();
 
-        //dd(count($users));
+        //dd($users);
         
         if (count($users) > 0) {
             return view('CRUD.users.listUsersSearch',compact('users'));

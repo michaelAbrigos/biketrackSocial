@@ -28,7 +28,15 @@
           <a class="nav-link" href="location">Real Time Location</a>
         </li>
         @else
-        
+        <li class="nav-item">
+          <div class="input-group">
+            <form class="form-inline mt-md-0" action="{{route('search')}}" method="get">
+              <input class="form-control mr-sm-2" name="searchterm" type="text" size="20" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn my-2 my-sm-0" type="submit" style="padding-left: 5px; padding-right: 5px;"><i class="material-icons">search</i></button>
+            </form>
+        </div>
+        </li>
         <li class="nav-item small-only">
           <a class="nav-link" href="location">Real Time Location</a>
         </li>

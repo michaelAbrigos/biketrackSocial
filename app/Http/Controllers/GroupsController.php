@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Group;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -13,7 +13,9 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        return view('CRUD.groups.group_index');
+        $groups = Group::with('users')->get();
+        //dd($groups);
+        return view('CRUD.groups.group_index',compact('groups'));
     }
 
     /**
@@ -34,7 +36,10 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = new Group;
+        $group->name = $request->gname;
+        $group->description = $request->desc;
+        
     }
 
     /**

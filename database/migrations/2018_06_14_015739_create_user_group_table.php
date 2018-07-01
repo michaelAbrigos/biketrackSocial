@@ -25,7 +25,6 @@ class CreateUserGroupTable extends Migration
             $table->engine = 'InnoDB';
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('group_id');
-            $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')->on('users')
