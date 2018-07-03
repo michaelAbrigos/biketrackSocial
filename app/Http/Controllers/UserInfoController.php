@@ -7,6 +7,7 @@ use Auth;
 use Input;
 use Response;
 use Validator;
+use App\Friend;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -135,19 +136,23 @@ class UserInfoController extends Controller
         
         $searchTerm = Input::get('searchterm');
         
-        $users = User::with('information')->where('parent_id',NULL)->wherehas('information', function ($q) use($searchTerm){
+        $users = User::with('information','friends','friendsAdded')->where('parent_id',NULL)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
             $q->where('first_name','LIKE','%'.$searchTerm.'%')->orWhere('last_name','LIKE','%'.$searchTerm.'%')->orWhere('username','LIKE','%'.$searchTerm.'%');
         })->get();
 
-        //dd($users);
+        $friend_ids = Friend::where('user_id',Auth::id())->pluck('friend_id')->toArray();
+        //dd($friend_ids);
+        $added_id = Friend::where('friend_id',Auth::id())->pluck('user_id')->toArray();
+        //dd($added_id);
+        //$isFriend = Friend::where('friend_id',Auth::id())->pluck('confirmed')->toArray();
+
+        
         
         if (count($users) > 0) {
-            return view('CRUD.users.listUsersSearch',compact('users'));
+            return view('CRUD.users.listUsersSearch',compact('users','friend_ids','added_id','isFriend'));
         }else{
             return view('CRUD.users.listUsersSearch',compact('users'))->with('status','No users found. Please search again!');
-        }
-       
-        
-       
+        }  
     }
+
 }

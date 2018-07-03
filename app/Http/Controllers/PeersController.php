@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Hash;
 use Response;
 use Auth;
+use App\Http\Requests\StorePeerUsers;
 use App\Http\Resources\Peer as PeerResource;
 use Illuminate\Http\Request;
 
@@ -41,26 +42,30 @@ class PeersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePeerUsers $request)
     {
+        $validated = $request->validated();
+        
+        if($validated){
 
-        $user = User::create([
+           $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'parent_id' => Auth::id()
-        ]);
+            ]);
 
-        $userID = $user->id;
+            $userID = $user->id;
 
-        $user_if = User_info::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'user_id' => $userID
-        ]);
-
-        if ($user_if = true){
+            $user_if = User_info::create([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'gender' => $request->gender,
+                'user_id' => $userID
+            ]); 
+        }
+        
+        if ($user_if){
             $user->assignRole('peers');
             return Response::json($user->information);
         }else{

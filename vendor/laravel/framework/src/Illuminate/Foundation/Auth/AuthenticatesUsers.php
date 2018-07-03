@@ -102,15 +102,9 @@ trait AuthenticatesUsers
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
-        if(($this->guard()->user()->parent_id)==null){
-            return $this->authenticated($request, $this->guard()->user())
+
+        return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
-        }else{
-            //dd($this->guard()->user());
-            return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPeers());
-        }
-        
     }
 
     /**

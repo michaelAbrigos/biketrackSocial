@@ -4,3 +4,4 @@
 @yield('content')
 
 @include('Layouts.footer')  
+@include('Scripts.addFriendAjax')

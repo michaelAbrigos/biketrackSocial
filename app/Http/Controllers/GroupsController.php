@@ -36,10 +36,11 @@ class GroupsController extends Controller
      */
     public function store(Request $request)
     {
+        
         $group = new Group;
         $group->name = $request->gname;
         $group->description = $request->desc;
-        
+
     }
 
     /**

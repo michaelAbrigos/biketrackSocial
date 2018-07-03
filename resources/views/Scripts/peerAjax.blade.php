@@ -127,7 +127,7 @@ $(document).ready(function(){
             },
             error: function (data) {
                 var options =  {
-                    content: "Seems there  is a problem adding a peer", // text of the snackbar
+                      content: data.responseJSON.message, // text of the snackbar
                     style: "toast", // add a custom class to your snackbar
                     timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
                 }
