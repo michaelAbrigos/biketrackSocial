@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasOne('App\User_info');
     }
 
+    public function getFullName()
+    {
+        return $this->information()->first_name . ' ' . $this->information()->last_name;
+    }
+
     public function devices(){
         return $this->belongsToMany('App\Device','device_user','user_id','device_id');
     }
@@ -41,8 +46,19 @@ class User extends Authenticatable
     }
 
     public function friends(){
-        return $this->hasMany('App\Friend','user_id');
+        return $this->belongsToMany('App\Friend','friends','user_id','friend_id');
     }
+
+    public function addFriend(User $user)
+    {
+        $this->friends()->attach($user->id);
+    }
+
+    public function removeFriend(User $user)
+    {
+        $this->friends()->detach($user->id);
+    }
+    
     public function friendsAdded(){
         return $this->hasMany('App\Friend','friend_id');
     }
