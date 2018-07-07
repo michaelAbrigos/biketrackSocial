@@ -11,7 +11,7 @@
   	</div>
 
   	<div class="container" style="padding-top: 10px;">
-		<div class="alert alert-secondary" role="alert">
+		<div class="alert alert-light" role="alert">
 	  		Looks like you don't have any groups!
 		</div>
 	</div>

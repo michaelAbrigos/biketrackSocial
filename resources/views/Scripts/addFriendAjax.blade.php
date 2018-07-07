@@ -1,10 +1,134 @@
 <script>
 var friendRequest;
 $(document).ready(function(){
-
 	$(document).on('click','#addFriend',function(e){
+        friendRequest()
+	});
 
-		$.ajaxSetup({
+    $(document).on('click','#confirmFriend',function(e){
+        addFriend();
+    });
+
+    $(document).on('click','#declineFriend',function(e){
+        declineFriendRequest();
+    });
+
+});
+
+
+function getNotificationCount(){
+    $.ajax({
+        type: "GET",
+        url: '/countFriendNotifications',
+        data: {},
+        dataType: 'json',
+        success: function (data) {
+            return data;
+        },
+        error: function (data) {
+            return false;
+        }
+
+    });
+}
+
+function getNotification(){
+    $.ajax({
+        type: "GET",
+        url: '/getFriendNotifsAjax',
+        data: {},
+        dataType: 'json',
+        success: function (data) {
+           
+        },
+        error: function (data) {
+            return false;
+        }
+
+    });
+}
+
+function addFriend(){
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+        e.preventDefault(); 
+        var friend_id = $(this).val();
+        var formData = {
+            f_id: $(this).val()
+        }
+
+        console.log(formData);
+
+        var updateURL = '/confirmFriend';
+        //console.log(gen);
+        $.ajax({
+            type: "POST",
+            url: updateURL,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                var btnAdd = '<span style="display: inline-block;"><p class="text-muted">Request Confirmed</p></span>'
+                
+                $("#span"+friend_id).replaceWith(btnAdd);
+
+                var options =  {
+                    content: "Friend Request Confirmed!", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                
+            },
+            error: function (data) {
+                var options =  {
+                    content: "Can't accept this request at the moment", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                console.log('Error:', data);
+            }
+
+    });
+
+}
+
+function declineFriendRequest(){
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+        e.preventDefault(); 
+        var friend_id = $(this).val();
+        var formData = {
+            f_id: $(this).val()
+        }
+
+        var updateURL = '/declineFriend';
+        //console.log(gen);
+        $.ajax({
+            type: "POST",
+            url: updateURL,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                var btnAdd = '<button type="button" class="btn btn-raised btn-warning" id="addFriend" value="" style="float: right;">Add Friend</button>'
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+
+        });
+}
+
+function friendRequest(){
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
@@ -15,8 +139,6 @@ $(document).ready(function(){
         var formData = {
             f_id: $(this).val()
         }
-
-        //console.log(formData);
 
         var updateURL = '/friend';
         //console.log(gen);
@@ -48,50 +170,6 @@ $(document).ready(function(){
                 console.log('Error:', data);
             }
 
-    });
-
-	});
-
-    friendRequest = getNotificationCount();
-
-    setInterval(getNotificationCount,1000);
-    if (friendRequest < getNotificationCount()){
-        console.log(friendRequest);
-    }else{
-        //console.log('hello');
-    }
-});
-
-function getNotificationCount(){
-        $.ajax({
-            type: "GET",
-            url: '/countFriendNotifications',
-            data: {},
-            dataType: 'json',
-            success: function (data) {
-                return data;
-            },
-            error: function (data) {
-                return false;
-            }
-
-    });
-}
-
-
-function getNotification(){
-        $.ajax({
-            type: "GET",
-            url: '/getFriendNotifsAjax',
-            data: {},
-            dataType: 'json',
-            success: function (data) {
-               
-            },
-            error: function (data) {
-                return false;
-            }
-
-    });
+        });
 }
 </script>

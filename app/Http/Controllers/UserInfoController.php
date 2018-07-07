@@ -136,20 +136,24 @@ class UserInfoController extends Controller
         
         $searchTerm = Input::get('searchterm');
         
-        $users = User::with('information','friends','friendsAdded')->where('parent_id',NULL)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
+        $users = User::with('information','friends')->where('parent_id',NULL)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
             $q->where('first_name','LIKE','%'.$searchTerm.'%')->orWhere('last_name','LIKE','%'.$searchTerm.'%')->orWhere('username','LIKE','%'.$searchTerm.'%');
         })->get();
 
         $friend_ids = Friend::where('user_id',Auth::id())->pluck('friend_id')->toArray();
-        //dd($friend_ids);
         $added_id = Friend::where('friend_id',Auth::id())->pluck('user_id')->toArray();
-        //dd($added_id);
-        //$isFriend = Friend::where('friend_id',Auth::id())->pluck('confirmed')->toArray();
+        //dd($users);
 
-        
-        
+        /*foreach ($users as $key => $user) {
+            //dd($user->friends);
+            if((count($user->friends)>0) || $user->friends->confirmed == "0" ){
+                $users->forget($key);
+            }
+        };*/
+
+        //dd($users);
         if (count($users) > 0) {
-            return view('CRUD.users.listUsersSearch',compact('users','friend_ids','added_id','isFriend'));
+            return view('CRUD.users.listUsersSearch',compact('users','friend_ids','added_id'));
         }else{
             return view('CRUD.users.listUsersSearch',compact('users'))->with('status','No users found. Please search again!');
         }  

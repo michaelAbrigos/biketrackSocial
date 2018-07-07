@@ -65,7 +65,7 @@ class FriendsController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -109,11 +109,35 @@ class FriendsController extends Controller
     }
 
     public function confirmFriend(Request $request){
+        //dd($notifs);
+
         if($request->f_id){
             $friend = Friend::where('friend_id',Auth::id())->where('user_id',$request->f_id)->first();
-        }else{
+            $friend->confirmed = 1;
+            $friend->save();
+            $user = User::find(Auth::id());
+            $notifs = $user->unreadNotifications;
 
+             foreach ($notifs as $notif) {
+                if($notif["data"]["user"]["id"] == $request->f_id){
+                    $notif->markAsRead();
+                }
+            }
+            return Response::json($friend);
+        }else{
+            return Response::json($friend);
         }
+        
+    }
+
+    public function listFriends(){
+        $friends = Friend::with('friendInfo')->where(function($query){
+            $query->where('user_id',Auth::id());
+            $query->where('confirmed',1);
+        })->orWhere(function($query){
+            $query->where('friend_id',Auth::id());
+            $query->where('confirmed',1);
+        })->get();
         
     }
 }

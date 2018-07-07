@@ -13,4 +13,7 @@ class Friend extends Model
         'friend_id', 'user_id','confirmed'
     ];
 
+    public function friendInfo(){
+    	return $this->belongsTo('App\User','user_id');
+    }
 }

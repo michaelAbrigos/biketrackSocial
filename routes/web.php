@@ -31,5 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('/friend','FriendsController')->except('index');
 	Route::get('countFriendNotifications','FriendsController@index');
 	Route::get('getFriendNotifsAjax','FriendsController@getList');
+	Route::post('confirmFriend','FriendsController@confirmFriend');
+	Route::get('getNotifs','FriendsController@getUnreadNotifs');
 });
 Route::get('/search','UserInfoController@search')->name('search');

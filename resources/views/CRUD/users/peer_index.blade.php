@@ -3,7 +3,6 @@
 @section('content')
 <meta name="_token" content="{!! csrf_token() !!}" />
   <div class="main">
-  	<meta name="_token" content="{!! csrf_token() !!}" />
   	@include('Layouts.sidebar')
 	<div class="row" style="margin-right: 0px !important">
 		<div class="col" style="padding-top: 7px; margin-left: 20px;"><h5 class="font-adam">List of peers</h5></div>
