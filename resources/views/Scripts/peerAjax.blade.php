@@ -108,11 +108,8 @@ $(document).ready(function(){
                 peerContainer+= '<button type="button" class="btn btn-raised btn-primary" data-toggle="modal" id="pi-b" data-target="#editPeer-'+data.id+'">Edit</button><button type="button" class="btn btn-raised btn-danger">Delete</button></div>';
                 peerContainer += '</div></div></div><br>';
 
-                if ('#peerList') {
-                    $("#noPeer").replaceWith(peerContainer);
-                }else{
                     $("#peerList").append(peerContainer);
-                }
+                
                 
                 
                 $('#peerAdd').modal('hide');

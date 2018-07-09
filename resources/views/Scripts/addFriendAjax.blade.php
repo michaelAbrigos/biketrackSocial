@@ -1,7 +1,7 @@
 <script>
 var friendRequest;
 $(document).ready(function(){
-	$(document).on('click','#addFriend',function(e){
+	$(document).on('click','.addFriend',function(e){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -14,6 +14,9 @@ $(document).ready(function(){
             f_id: $(this).val()
         }
 
+        var RequestedID = e.target.id; //getID of Button
+        //console.log(RequestedID);
+
         var updateURL = '/friend';
         //console.log(gen);
         $.ajax({
@@ -23,9 +26,9 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                var btnAdd = '<div class="btn-group" style="float: right;"><button type="button" class="btn btn-raised btn-warning" disabled>Request Sent</button><button type="button" class="btn btn-raised btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Cancel Request</a></div></div>'
+                var btnAdd = '<div class="btn-group" style="float: right;"><button type="button" class="btn btn-raised btn-warning" disabled>Request Sent</button><button type="button" class="btn btn-raised btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button><div class="dropdown-menu"><a class="dropdown-item" href="#" value="'+RequestedID+'">Cancel Request</a></div></div>'
                 
-                $("#addFriend").replaceWith(btnAdd);
+                $('#'+RequestedID).replaceWith(btnAdd);
 
                 var options =  {
                     content: "Friend Request Sent!", // text of the snackbar

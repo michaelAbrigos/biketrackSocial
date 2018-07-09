@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function getFullName()
     {
-        return $this->information()->first_name . ' ' . $this->information()->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function devices(){
@@ -46,20 +46,16 @@ class User extends Authenticatable
     }
 
     public function friends(){
-        return $this->belongsToMany('App\Friend','friends','user_id','friend_id');
+        return $this->belongsToMany('App\User','friends_users','user_id','friend_id')->withPivot('confirmed');
     }
 
-    public function addFriend(User $user)
-    {
-        $this->friends()->attach($user->id);
+    public function friendsRequests(){
+        return $this->belongsToMany('App\User','friends_users','friend_id','user_id')->withPivot('confirmed');
     }
 
     public function removeFriend(User $user)
     {
         $this->friends()->detach($user->id);
     }
-    
-    public function friendsAdded(){
-        return $this->hasMany('App\Friend','friend_id');
-    }
+
 }

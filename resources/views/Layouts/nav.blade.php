@@ -46,19 +46,23 @@
         </li>
         @else
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">supervisor_account</i>{{ count(Auth::user()->unreadNotifications) }}</a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">notification_important</i><span class="badge badge-light">{{ count(Auth::user()->unreadNotifications) }}</span></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"">
             <h6 class="dropdown-header">Friend Requests</h6>
             @if(count(Auth::user()->unreadNotifications)==0)
               <h6 class="dropdown-item">No friend requests</h6>
             @else
             @foreach(Auth::user()->unreadNotifications as $request)
-            <div class="dropdown-item">
-              <a class="dropdown-item" href="#" style="display: inline-block; max-width: none;">{{ $request->data["user"]["information"]["first_name"]}} {{ $request->data["user"]["information"]["last_name"]}}</a>
-                <span style="display: inline-block;" id="span-{{ $request->data["user"]["id"]}}">
-                  <button class="btn btn-raised btn-warning" id="confirmFriend" value="{{ $request->data["user"]["id"]}}" style="margin-left: 20px !important;">Confirm</button>
-                  <button class="btn btn-raised btn-secondary" id="declineFriend" style="margin-left:5px;">Decline</button>
-                </span>
+            <div class="">
+                <a class="dropdown-item" href="{{route('friends.requests')}}" style="display: inline-block; max-width: none;">
+                <div class="col-md-2" style="display: inline-block; padding-left: 0px;">@if($request->data["user"]["information"]["gender"] == "Male")
+                <img src="{{asset('avatars/male1.svg')}}" height="50px;">
+                @else
+                <img src="{{asset('avatars/female.svg')}}" height="50px;">
+                @endif</div>
+                <div class="col-md-10" style="display: inline-block;top: 8px;padding-left: 15px;"> 
+                {{ $request->data["user"]["information"]["first_name"]}} {{ $request->data["user"]["information"]["last_name"]}}<p style="font-size: 10px;">has sent you a friend request</p></div></a>
+             
               </div>
               @endforeach
             @endif

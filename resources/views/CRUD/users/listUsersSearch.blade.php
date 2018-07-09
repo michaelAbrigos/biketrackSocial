@@ -42,7 +42,7 @@
 									    <span class="sr-only">Toggle Dropdown</span>
 									  </button>
 									  <div class="dropdown-menu">
-									    <a class="dropdown-item" href="#">Cancel Request</a>
+									    <a class="dropdown-item cancelRequest" href="#" value="{{$user->id}}">Cancel Request</a>
 									  </div>
 									</div>
 								@elseif(in_array($user->id,$added_id))
@@ -56,7 +56,7 @@
 									  </div>
 									</div>
 			   	 				@else
-			   	 					<button type="button" class="btn btn-raised btn-warning" id="addFriend" value="{{$user->id}}" style="float: right;">Add Friend</button>
+			   	 					<button type="button" class="btn btn-raised btn-warning addFriend" id="{{$user->id}}" value="{{$user->id}}" style="float: right;">Add Friend</button>
 									
 			   	 				@endif
 				   	 			</div>

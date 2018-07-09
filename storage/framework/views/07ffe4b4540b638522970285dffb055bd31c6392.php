@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 <meta name="_token" content="<?php echo csrf_token(); ?>" />
-  <div class="main">
+  <div class="main"">
   	<?php echo $__env->make('Layouts.sidebar', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	  <div class="card bg-light mb-3">
 	    <div class="card-header header-color">
@@ -41,12 +41,19 @@
 	  				</div>
 			    	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 			      	<div class="card-body">
-				        <p id="p_fname"><b>First Name:</b> <?php echo e($users->first_name); ?></p>
-				        <p id="p_lname"><b>Last Name:</b> <?php echo e($users->last_name); ?></p>
-				        <p id="p_gender"><b>Gender:</b> <?php echo e($users->gender); ?></p>
-				        <p id="p_contact"><b>Contact Number:</b> <?php echo e($users->contact_number); ?></p>
-				        <p id="p_bday"><b>Birthday:</b> <?php echo e($bday); ?></p>
-				        <p id="p_address"><b>Address:</b> <?php echo e($users->home_address); ?></p>
+			      		<div class="row">
+			      			<div class="col"><p id="p_fname"><b>First Name:</b> <?php echo e($users->first_name); ?></p></div>
+			      			<div class="col"><p id="p_lname"><b>Last Name:</b> <?php echo e($users->last_name); ?></p></div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col"><p id="p_gender"><b>Gender:</b> <?php echo e($users->gender); ?></p></div>
+			      			<div class="col"><p id="p_contact"><b>Contact Number:</b> <?php echo e($users->contact_number); ?></p></div>
+			      		</div>
+				    	<div class="row">
+				    		<div class="col"><p id="p_bday"><b>Birthday:</b> <?php echo e($bday); ?></p></div>
+				    		<div class="col"><p id="p_address"><b>Address:</b> <?php echo e($users->home_address); ?></p></div>
+				    	</div>
+				        
 			      	</div>
 			  		</div>
 			  	</div>
@@ -74,9 +81,9 @@
 	    			</div>
 	    			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 	      			<div class="card-body">
-				        <p><b>Username:</b>Abri</p>
-				        <p><b>Email:</b> michael.abrigos27@gmail.com</p>
-				        <p><b>Password: *******</b> </p>
+				        <p id="p_uname"><b>Username:</b> <?php echo e($users->user->username); ?></p>
+				        <p id="p_email"><b>Email:</b> <?php echo e($users->user->email); ?></p>
+				        <p id="p_pass"><b>Password: <a href="#">change password</a></b> </p>
 	      			</div>
 	    			</div>
 	  			</div>
@@ -90,7 +97,7 @@
 				        </button>
 	      			</h5>
 	    			</div>
-	    			<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+	    			<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 	      			<div class="card-body">
 				        <?php if(count($devices) == 0): ?>
 				        No added device!

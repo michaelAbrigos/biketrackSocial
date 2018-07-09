@@ -10,7 +10,7 @@ class CreateFriendsTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $set_schema_table = 'friends';
+    public $set_schema_table = 'friends_users';
 
     /**
      * Run the migrations.

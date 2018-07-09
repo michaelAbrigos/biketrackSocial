@@ -17,11 +17,24 @@ class FriendsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $user = User::find(Auth::id());
-        $notifs = $user->notifications;
-        return Response::json(count($notifs));
+    {   
+        //$user = User::with('information')->where('id',Auth::id())->first();
+        $listFriends = Auth::user()->friends;
+        //dd($listFriends);
+        $friendInfo = User::with('information')->whereIn('id', Auth::user()->friends->modelKeys())->get();
+        //dd($friendInfo);
 
+        return view('CRUD.users.listFriends',compact('friendInfo','listFriends'));
+    }
+
+    public function listnotFriends(){
+        $not_friends = User::where('id', '!=', Auth::id())->where('parent_id',NULL);
+        if (Auth::user()->friends->count()) {
+          $not_friends->whereNotIn('id', Auth::user()->friends->modelKeys());
+        }
+        $not_friends = $not_friends->get();
+
+        return Response::json($not_friends);
     }
 
     /**
@@ -130,14 +143,18 @@ class FriendsController extends Controller
         
     }
 
-    public function listFriends(){
-        $friends = Friend::with('friendInfo')->where(function($query){
-            $query->where('user_id',Auth::id());
-            $query->where('confirmed',1);
-        })->orWhere(function($query){
-            $query->where('friend_id',Auth::id());
-            $query->where('confirmed',1);
-        })->get();
-        
+    public function FriendRequest(){
+        //$user = User::with('information')->where('id',Auth::id())->first();
+        $listFriends = Auth::user()->friendsRequests;
+        //dd($listFriends);
+        $friendInfo = User::with('information')->whereIn('id', Auth::user()->friendsRequests->modelKeys())->get();
+        //dd($friendInfo);
+        return view('CRUD.users.listFriendRequest',compact('friendInfo','listFriends'));
+    }
+
+    public function countFriendNotifs(){
+        $user = User::find(Auth::id());
+        $notifs = $user->notifications;
+        return Response::json(count($notifs));
     }
 }

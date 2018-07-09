@@ -2,7 +2,7 @@
 
 @section('content')
 <meta name="_token" content="{!! csrf_token() !!}" />
-  <div class="main">
+  <div class="main"">
   	@include('Layouts.sidebar')
 	  <div class="card bg-light mb-3">
 	    <div class="card-header header-color">
@@ -43,12 +43,19 @@
 	  				</div>
 			    	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 			      	<div class="card-body">
-				        <p id="p_fname"><b>First Name:</b> {{ $users->first_name }}</p>
-				        <p id="p_lname"><b>Last Name:</b> {{ $users->last_name }}</p>
-				        <p id="p_gender"><b>Gender:</b> {{ $users->gender }}</p>
-				        <p id="p_contact"><b>Contact Number:</b> {{ $users->contact_number }}</p>
-				        <p id="p_bday"><b>Birthday:</b> {{ $bday }}</p>
-				        <p id="p_address"><b>Address:</b> {{ $users->home_address }}</p>
+			      		<div class="row">
+			      			<div class="col"><p id="p_fname"><b>First Name:</b> {{ $users->first_name }}</p></div>
+			      			<div class="col"><p id="p_lname"><b>Last Name:</b> {{ $users->last_name }}</p></div>
+			      		</div>
+			      		<div class="row">
+			      			<div class="col"><p id="p_gender"><b>Gender:</b> {{ $users->gender }}</p></div>
+			      			<div class="col"><p id="p_contact"><b>Contact Number:</b> {{ $users->contact_number }}</p></div>
+			      		</div>
+				    	<div class="row">
+				    		<div class="col"><p id="p_bday"><b>Birthday:</b> {{ $bday }}</p></div>
+				    		<div class="col"><p id="p_address"><b>Address:</b> {{ $users->home_address }}</p></div>
+				    	</div>
+				        
 			      	</div>
 			  		</div>
 			  	</div>
@@ -76,9 +83,9 @@
 	    			</div>
 	    			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 	      			<div class="card-body">
-				        <p><b>Username:</b>Abri</p>
-				        <p><b>Email:</b> michael.abrigos27@gmail.com</p>
-				        <p><b>Password: *******</b> </p>
+				        <p id="p_uname"><b>Username:</b> {{ $users->user->username }}</p>
+				        <p id="p_email"><b>Email:</b> {{ $users->user->email }}</p>
+				        <p id="p_pass"><b>Password: <a href="#">change password</a></b> </p>
 	      			</div>
 	    			</div>
 	  			</div>
@@ -92,7 +99,7 @@
 				        </button>
 	      			</h5>
 	    			</div>
-	    			<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+	    			<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
 	      			<div class="card-body">
 				        @if(count($devices) == 0)
 				        No added device!

@@ -28,8 +28,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('/device', 'DeviceController')->only('store');
 	Route::resource('/groups', 'GroupsController')->only('index');
 	Route::resource('/peers', 'PeersController');
-	Route::resource('/friend','FriendsController')->except('index');
-	Route::get('countFriendNotifications','FriendsController@index');
+	Route::get('friends/requests','FriendsController@FriendRequest')->name('friends.requests');
+    Route::resource('/friends','FriendsController');
+	Route::get('countFriendNotifications','FriendsController@countFriendNotifs');
 	Route::get('getFriendNotifsAjax','FriendsController@getList');
 	Route::post('confirmFriend','FriendsController@confirmFriend');
 	Route::get('getNotifs','FriendsController@getUnreadNotifs');
