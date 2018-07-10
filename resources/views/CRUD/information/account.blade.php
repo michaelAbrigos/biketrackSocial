@@ -8,16 +8,16 @@
 	    <div class="card-header header-color">
 	      <div class="row">
 	   	 	  <div class="col-md-1 col-sm-12 image-div">
-	   	 			<center><img src="{{asset('avatars/male1.svg')}}" height="100px"></center>
+	   	 			<center><img src="{{asset('avatars/male1.svg')}}" height="70px"></center>
 	   	 		</div>
 	   	 		<div class="col-md-4 col-sm-12 name-div">
-	 	 				<h3 id="titleFname">{{ $users->first_name." ".$users->last_name }}</h3>
-	 	 				<h5>({{ $users->user->username }})</h5>
+ 	 				<h4 id="titleFname">{{ $users->first_name." ".$users->last_name }}</h4>
+ 	 				<h6>({{ $users->user->username }})</h6>
 	   	 		</div>
 	   	 	</div>
 	   	</div>
 	    <div class="card-body">
-	      <h5 class="card-title">Account Settings</h5>
+	      
 	      <div id="accordion">
 	        <div class="card">
 	          <div class="card-header card-head-color" id="headingOne">
@@ -31,17 +31,17 @@
 	      	       	</div>
 	              	<div class="col-md-4 menu-div">
 	              		<div class="dropdown">
-		        				  <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="btnvert" data-toggle="dropdown" aria-haspopup="true" value="{{$users->user_id}}" aria-expanded="false">
-		        				    <i class="material-icons">more_vert</i>
-		        				  </button>
-		        				  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
-		        				    <a class="dropdown-item" href="#" data-toggle="modal" id="pi-b" data-target="#persoinfo"><i class="material-icons">edit</i> &nbsp Edit</a>
-		        				  </div>
-	        					</div>
+        				  <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="btnvert" data-toggle="dropdown" aria-haspopup="true" value="{{$users->user_id}}" aria-expanded="false">
+        				    <i class="material-icons">more_vert</i>
+        				  </button>
+        				  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
+        				    <a class="dropdown-item" href="#" data-toggle="modal" id="pi-b" data-target="#persoinfo"><i class="material-icons">edit</i> &nbsp Edit</a>
+        				  </div>
+	        			</div>
 	              	</div>
-	      			</div>
-	  				</div>
-			    	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+	      		</div>
+	  		</div>
+			    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 			      	<div class="card-body">
 			      		<div class="row">
 			      			<div class="col"><p id="p_fname"><b>First Name:</b> {{ $users->first_name }}</p></div>
@@ -57,8 +57,8 @@
 				    	</div>
 				        
 			      	</div>
-			  		</div>
 			  	</div>
+			 </div>
 	  			<div class="card">
 	    			<div class="card-header card-head-color" id="headingTwo">
 	      			<div class="row">
@@ -75,7 +75,7 @@
 									    <i class="material-icons">more_vert</i>
 									  </button>
 									  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="ex1">
-									    <a class="dropdown-item" href="#" data-toggle="modal" value="{{$users->user_id}}" data-target="#accountinfo"><i class="material-icons">edit</i> &nbsp Edit</a>
+									    <a class="dropdown-item" href="#" data-toggle="modal" id="ai-b" value="{{$users->user_id}}" ><i class="material-icons">edit</i> &nbsp Edit</a>
 									  </div>
 									</div>
 	      				</div>
@@ -85,7 +85,7 @@
 	      			<div class="card-body">
 				        <p id="p_uname"><b>Username:</b> {{ $users->user->username }}</p>
 				        <p id="p_email"><b>Email:</b> {{ $users->user->email }}</p>
-				        <p id="p_pass"><b>Password: <a href="#">change password</a></b> </p>
+				        <p id="p_pass"><b>Password: <a href="#" id="ch-pass">change password</a></b> </p>
 	      			</div>
 	    			</div>
 	  			</div>
@@ -123,9 +123,11 @@
 		</div>
 	</div>
 @include('CRUD.information.personal_info_modal')
+@include('CRUD.information.changePassword_modal')
 @include('CRUD.information.account_info_modal')
 @include('CRUD.information.device_info_modal')
 @include('Scripts.editAjax')
+@include('Scripts.passwordRev')
 <script type="text/javascript">
 $(document).ready(function()
 {

@@ -152,6 +152,12 @@ class FriendsController extends Controller
         return view('CRUD.users.listFriendRequest',compact('friendInfo','listFriends'));
     }
 
+    public function declineFriend($id){
+        $user = User::find($id);
+        $ok = Auth::user()->removeFriend($user);
+        return Response::json($ok);
+    }
+
     public function countFriendNotifs(){
         $user = User::find(Auth::id());
         $notifs = $user->notifications;

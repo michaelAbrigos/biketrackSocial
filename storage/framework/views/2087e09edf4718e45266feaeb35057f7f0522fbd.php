@@ -19,6 +19,22 @@ $(document).ready(function(){
         }) 
 	})
 
+    $(document).on("click",'#ai-b',function(){
+        
+        //console.log(id);
+        $.get(url + '/getUsernameEmail', function (data) {
+            //success data
+            //console.log(data);
+            $('#username').val(data.username);
+            $('#email').val(data.email);
+            $('#accountinfo').modal('show');
+        }) 
+    })
+
+    $(document).on("click",'#ch-pass',function(){
+        $('#changePass').modal('show');
+    })
+
     $(document).on("click","#submitDevice",function(e){
         
         $.ajaxSetup({
@@ -62,7 +78,7 @@ $(document).ready(function(){
                     timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
                 }
                 $.snackbar(options);
-                console.log('Error:', data);
+                //console.log('Error:', data);
             }
 
     });
@@ -136,6 +152,8 @@ $(document).ready(function(){
             }
         });
 	});
+
+
 });
 
 </script>

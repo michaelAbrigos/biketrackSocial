@@ -9,6 +9,7 @@ use Response;
 use Validator;
 use App\Friend;
 use App\User;
+use App\Http\Resources\UsernameEmail as UsernameEmailResource;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
@@ -81,7 +82,7 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -157,6 +158,11 @@ class UserInfoController extends Controller
         }else{
             return view('CRUD.users.listUsersSearch',compact('users'))->with('status','No users found. Please search again!');
         }  
+    }
+
+    public function getUsernameEmail(){
+        $users = User::find(Auth::id());
+        return new UsernameEmailResource($users);
     }
 
 }

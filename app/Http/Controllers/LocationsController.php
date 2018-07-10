@@ -105,6 +105,11 @@ class LocationsController extends Controller
        
         $location = Location::where('device_id',$dev_id)->orderBy('created_at', 'desc')->get(['latitude','longitude'])->first();
         //dd($location);
-        return Response::json($location);
+        if(!$location){
+            return Response::json(False);
+        }else{
+            return Response::json($location);
+        }
+        
     }
 }

@@ -5,6 +5,7 @@ use App\Device;
 use App\Device_user;
 use Auth;
 use Response;
+use App\Http\Requests\AddDevices;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -16,9 +17,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //$deviceID = Device::find(1);
-        $deviceID = Device::where('device_code','LIKE', 'sdasdasd')->first();
-        dd(count($deviceID));
+
     }
 
     /**
@@ -37,19 +36,19 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddDevices $request)
     {
-        $device = Device::with('users')->where('device_code','LIKE', $request->code)->first();
-        //dd($device);        
-        if (count($device) == 1) {
-            //dd('$device');
-            $device->users()->attach(Auth::id());
-            return Response::json($device);
-        }else{
-            return false;
+        $validated = $request->validated();
+        if($validated){
+            $device = Device::with('users')->where('device_code','LIKE', $request->code)->first();
+            //dd($device);        
+            if (count($device) == 1) {
+                $device->users()->attach(Auth::id());
+                return Response::json($device);
+            }else{
+                return false;
+            }
         }
-        
-
         
     }
 

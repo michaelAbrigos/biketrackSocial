@@ -15,20 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('location', 'LocationsController');
-Route::get('/getLocation','LocationsController@getLocation');
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 //add all routes here to have auth middleware
 Route::group(['middleware' => 'auth'], function() {
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::resource('location', 'LocationsController');
+	Route::get('/getLocation','LocationsController@getLocation');
+	
 	//Routes for updating user information.
+	Route::get('account/getUsernameEmail','UserInfoController@getUsernameEmail');
     Route::resource('account', 'UserInfoController');
+
     //will add more device controller for user.
-	Route::resource('/device', 'DeviceController')->only('store');
+	Route::resource('/device', 'DeviceController');
 	Route::resource('/groups', 'GroupsController')->only('index');
 	Route::resource('/peers', 'PeersController');
 	Route::get('friends/requests','FriendsController@FriendRequest')->name('friends.requests');
+	Route::get('friends/declineFriend/{id}','FriendsController@declineFriend')->name('friends.declineRequest');
     Route::resource('/friends','FriendsController');
 	Route::get('countFriendNotifications','FriendsController@countFriendNotifs');
 	Route::get('getFriendNotifsAjax','FriendsController@getList');

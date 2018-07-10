@@ -1,49 +1,144 @@
 <script>		
-var map;
+var map,infoWindow;
+var position1 = {};
 var markers = [];
-    
+var numDeltas = 100;
+var delay = 10; //milliseconds
+var i = 0;
+var deltaLat;
+var deltaLng;
+
+function callback(response){
+    //console.log(response);
+    position1 = response;
+}
+
 function initMap() {
 
 var startplace = {lat: 14.5176, lng: 121.0509}
 var map = new google.maps.Map(
-document.getElementById('map'), {zoom: 16, center: startplace});
-
-$.ajax({
-      type:"GET",
-      url:"/getLocation",
-      data: "",
-      dataType: 'json',
-      success: function(data)
-    	{
-        var myLocation = {lat: data.latitude, lng: data.longitude};
-		    var marker = new google.maps.Marker({position: myLocation, map: map});
-			  markers.push(marker);
-        var latLng = marker.getPosition(); // returns LatLng object
-        map.setCenter(latLng)
-		}
-});
-
-setInterval(function()
-{ 
-	clearMarkers();
+    document.getElementById('map'), 
+    {zoom: 16, center: startplace}
+);
 
     $.ajax({
-      type:"GET",
-      url:"/getLocation",
-      data: "",
-      dataType: 'json',
-      success: function(data)
-      {
-      	var myLocation = {lat: data.latitude , lng: data.longitude};
-        var marker = new google.maps.Marker({position: myLocation, map: map});
-        markers.push(marker);
-        marker.setMap(map);
-		    //console.log(map);  
-      }
+          type:"GET",
+          url:"/getLocation",
+          data: "",
+          dataType: 'json',
+          success: function(data){
+            //console.log($.trim(data));
+            if(!data){
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                    };
+                    callback(pos);
+
+                    var marker = new google.maps.Marker({position: pos, map: map});
+                    markers.push(marker);
+                    //infoWindow.open(map);
+                    map.setCenter(pos);
+                  }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                  });
+                } else {
+                  // Browser doesn't support Geolocation
+                  handleLocationError(false, infoWindow, map.getCenter());
+                }
+            
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.open(map);
+                }
+          }else{
+            //console.log('HI');
+            var myLocation = {lat: data.latitude, lng: data.longitude};
+            var marker = new google.maps.Marker({position: myLocation, map: map});
+            markers.push(marker);
+            var latLng = marker.getPosition(); // returns LatLng object
+            map.setCenter(latLng);
+          }  
+        }
     });
 
-    //intervals for refresh and get request.
-}, 10000);
+    setInterval(function(){ 
+        //console.log(pos);
+    	//clearMarkers();
+
+        $.ajax({
+          type:"GET",
+          url:"/getLocation",
+          data: "",
+          dataType: 'json',
+          success: function(data)
+          {
+
+            if(!data){
+                infoWindow = new google.maps.InfoWindow;
+
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    transition(position1);
+                    console.log(position1.lat,position1.lng);
+                    map.setCenter(new google.maps.LatLng(position1.lat, position1.lng));
+                  }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                  });
+                } else {    
+                  // Browser doesn't support Geolocation
+                  handleLocationError(false, infoWindow, map.getCenter());
+                }
+            
+                function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent(browserHasGeolocation ?
+                        'Error: The Geolocation service failed.' :
+                        'Error: Your browser doesn\'t support geolocation.');
+                    infoWindow.open(map);
+                }
+          }else{
+            clearMarkers();
+          	var myLocation = {lat: data.latitude , lng: data.longitude};
+            var marker = new google.maps.Marker({position: myLocation, map: map});
+            markers.push(marker);
+            marker.setMap(map);
+    		    //console.log(map);  
+          }}
+        });
+
+        //intervals for refresh and get request.
+    }, 10000);
+
+
+}
+
+function transition(result){
+    i = 0;
+    deltaLat = (result[0] - position1[0])/numDeltas;
+    deltaLng = (result[1] - position1[1])/numDeltas;
+    moveMarker();
+}
+
+function moveMarker(){
+    var myLocation = {lat:position1[0] += deltaLat,lng:position1[1] += deltaLng}
+    //var latlng = new google.maps.LatLng(position[0], position[1]);
+    var marker = new google.maps.Marker({position: myLocation, map: map});
+    //marker.setTitle("Latitude:"+position[0]+" | Longitude:"+position[1]);
+    //marker.setPosition(latlng);
+    if(i!=numDeltas){
+        i++;
+        setTimeout(moveMarker, delay);
+    }
 }
 
   function setMapOnAll(map) {

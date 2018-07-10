@@ -24,8 +24,8 @@ class CreateLocationTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->float('latitude',10,6)->nullable();
+            $table->float('longitude'10,6)->nullable();
             $table->unsignedInteger('device_id');
             $table->timestamps();
 

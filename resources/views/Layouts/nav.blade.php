@@ -46,7 +46,7 @@
         </li>
         @else
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">notification_important</i><span class="badge badge-light">{{ count(Auth::user()->unreadNotifications) }}</span></a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">notifications</i><span class="badge badge-light">{{ count(Auth::user()->unreadNotifications) }}</span></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"">
             <h6 class="dropdown-header">Friend Requests</h6>
             @if(count(Auth::user()->unreadNotifications)==0)

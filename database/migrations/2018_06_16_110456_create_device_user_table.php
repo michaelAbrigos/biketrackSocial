@@ -20,7 +20,7 @@ class CreateDeviceUserTable extends Migration
 
             $table->foreign('device_id')
                 ->references('id')->on('devices')
-                ->onDelete('no action')
+                ->onDelete('cascade')
                 ->onUpdate('no action');
 
             $table->foreign('user_id')

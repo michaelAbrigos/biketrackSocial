@@ -112,7 +112,7 @@ $(document).ready(function(){
             f_id: $(this).val()
         }
 
-        var updateURL = '/declineFriend';
+        var updateURL = 'friends/declineFriend/'+friend_id;
         //console.log(gen);
         $.ajax({
             type: "POST",

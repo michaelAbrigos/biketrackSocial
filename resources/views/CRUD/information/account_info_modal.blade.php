@@ -9,20 +9,14 @@
       </div>
       <form>
 	      <div class="modal-body">
-	        	<div class="row">
-	        		<div class="col">
-	        			<div class="form-group">
-				            <label for="username" class="col-form-label">Username:</label>
-				            <input type="text" class="form-control" required id="username">
-			          	</div>
-	        		</div>
-	        		<div class="col">
-	    			 	<div class="form-group">
-				            <label for="email" class="col-form-label">Email:</label>
-				            <input type="email" class="form-control" required id="email">
-			        	</div>
-	        		</div>
-	        	</div>
+			<div class="form-group">
+	            <label for="username" class="col-form-label">Username:</label>
+	            <input type="text" class="form-control" required id="username">
+          	</div>
+		 	<div class="form-group">
+	            <label for="email" class="col-form-label">Email:</label>
+	            <input type="email" class="form-control" required id="email">
+        	</div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
