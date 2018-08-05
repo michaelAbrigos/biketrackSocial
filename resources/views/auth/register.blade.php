@@ -1,97 +1,58 @@
 @extends('Layouts.master')
 @section('content')
-
-
-<div class="container">
-    <div class="row justify-content-center register-top">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header header-color font-adam">{{ __('Register Account') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row">
-                            <div class="col">
+<body class="bg-dark">
+<div class="main-container mt-4">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-md-6 col-lg-5 section-intro">
+                    <h1 class="display-3">Track your Bike</h1>
+                    <span class="lead">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                    </span>
+                </div>
+                <!--end of col-->
+                <div class="col-12 col-md-6 col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('register') }}">
+                             @csrf
                                 <div class="form-group">
-                                    <label for="fname" class="col-form-label">First Name</label>
-                                    <input type="text" class="form-control" required name="fname">
+                                    <label for="exampleInputUsername">Username</label>
+                                    <input type="text" class="form-control form-control-lg" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Pick a username" name="username">
                                 </div>
-                            </div>
-                            <div class="col">
                                 <div class="form-group">
-                                    <label for="lname" class="col-form-label">Last Name</label>
-                                    <input type="text" class="form-control" required name="lname">
+                                    <label for="exampleInputEmail">Email address</label>
+                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                                    <small id="emailHelp" class="form-text">We'll never share your email with anyone else.</small>
                                 </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col">
                                 <div class="form-group">
-                                    <label for="username" class="col-form-label">Username</label>
-                                    <input type="text" class="form-control" required name="username">
+                                    <label for="exampleInputPassword">Password</label>
+                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword" placeholder="Password" name="password">
                                 </div>
-                            </div>
-                            <div class="col" style="padding-top: 20px">
-                                <select class="custom-select custom-select-sm" name="gender">
-                                  <option value="Male" disabled selected>Gender</option>
-                                  <option value="Male">Male</option>
-                                  <option value="Female">Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="email" class="col-form-label">Email</label>
-                                    <input type="email" class="form-control" required name="email">
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="password" class="col-form-label">Password</label>
-                                    <div class="input-group">
-                                    <input type="password" class="form-control" id="pass" required name="password">
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="basic-addon2"><img src="{{asset('icons/eye.svg')}} " style="height: 15px;" onclick="showPass()" id="eye"  data-toggle="tooltip" data-placement="right" title="Show/Hide Password"></span>
+                                <div class="mb-3">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
+                                        <label class="custom-control-label text-small" for="check-agree">I agree to the <a href="#">Terms &amp; Conditions</a>
+                                        </label>
                                     </div>
                                 </div>
-                                </div> 
-                            </div>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Sign up for BTS</button>
+                                @if (session('Success'))
+                                <br>
+                                    <div class="alert alert-success">
+                                        {{ session('Success') }}
+                                    </div>
+                                @endif
+                            </form>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                          <label class="form-check-label" for="defaultCheck1" style="padding-top: 6px;">
-                            <small class="text-muted">Accept Terms and condtions <a href="">Link here</a></small>
-                          </label>
-                        </div>
-
+                    </div>
                 </div>
-                <div class="card-footer text-right">
-                    <button type="submit" class="btn btn-primary">
-                        {{ __('Register') }}
-                    </button>
-                </div>
-
-                </form>
             </div>
+            <!--end of row-->
         </div>
-    </div>
+        <!--end of container-->
+    
 </div>
+
 @include('Scripts.passwordRev')
 @endsection

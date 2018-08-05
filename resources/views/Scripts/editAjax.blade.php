@@ -4,6 +4,8 @@ $(document).ready(function(){
 	var url = '/account'
 	var id = $('#btnvert').val();
 
+
+
 	$(document).on("click",'#pi-b',function(){
 		
 		//console.log(id);
@@ -82,6 +84,8 @@ $(document).ready(function(){
             }
 
     });
+
+
 });
 
 	$(document).on("click","#updatePI",function(e){
@@ -153,7 +157,24 @@ $(document).ready(function(){
         });
 	});
 
+    //change select option on load
+    if($('meta[name="_token"]').val() == "Male"){
+         $('select').find('option[value=Male]').attr('selected','selected');
+    }else{
+         $('select').find('option[value=Female]').attr('selected','selected');
+    }
 
 });
+
+$('input[name="fname"],input[name="lname"],input[name="username"],input[name="email"]').change(function(){
+    if($(this).val()){
+        console.log($(this).val());
+        $('button[name="submit"]').prop("disabled",false);
+    }else{
+        $('button[name="submit"]').prop("disabled",true);
+    }
+});
+
+
 
 </script>

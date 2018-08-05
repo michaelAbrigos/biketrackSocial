@@ -24,11 +24,11 @@ class CreatePlacesTable extends Migration
         Schema::create($this->set_schema_table, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name', 45)->nullable();
-            $table->string('description', 45)->nullable();
+            $table->string('name', 255);
+            $table->string('description', 255);
             $table->string('type', 45)->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->float('latitude');
+            $table->float('longitude');
             $table->timestamps();
         });
     }

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Device;
-use App\Device_user;
 use Auth;
 use Response;
+use App\Device;
+use App\Device_user;
 use App\Http\Requests\AddDevices;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class DeviceController extends Controller
      */
     public function index()
     {
-
+        
     }
 
     /**
@@ -27,7 +27,7 @@ class DeviceController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -36,7 +36,7 @@ class DeviceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddDevices $request)
+    public function store(Request $request)
     {
         $validated = $request->validated();
         if($validated){
@@ -49,7 +49,6 @@ class DeviceController extends Controller
                 return false;
             }
         }
-        
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use App\User_info;
 use App\User;
+use DB, Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/register';
 
     /**
      * Create a new controller instance.
@@ -49,11 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'fname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'lname' => 'required|string|max:255',
-            'gender' => 'required',
             'username' => 'required|string|max:255'
         ]);
     }
@@ -72,20 +70,19 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $userID = $user->id;
-
-        $user_if = User_info::create([
-            'first_name' => $data['fname'],
-            'last_name' => $data['lname'],
-            'gender' => $data['gender'],
-            'user_id' => $userID
-        ]);
-        if ($user_if = true){
-            $user->assignRole('bike_user');
-            return $user;    
-        }else{
-            return false;
-        } 
-        
+        $user->assignRole('bike_user');
+    
+        $email = $data['email'];
+        $username = $data['username'];
+        $verification_code = str_random(30); //Generate verification code
+        DB::table('user_verifications')->insert(['user_id'=>$user->id,'token'=>$verification_code]);
+        $subject = "Please verify your email address.";
+        Mail::send('email.verify', ['username' => $username, 'verification_code' => $verification_code],
+            function($mail) use ($email, $username, $subject){
+                $mail->from(getenv('FROM_EMAIL_ADDRESS'), "biketrack@gmail.com");
+                $mail->to($email, $username);
+                $mail->subject($subject);
+            });
+     return redirect()->back()->with('Success','Thanks for signing up! Please check your email to complete your registration.');   
     }
 }

@@ -25,7 +25,10 @@ class UserInfoController extends Controller
     {
         $users = User_info::with('user')->where('user_id','=',Auth::id())->first();
         //$devices = Device::with('user')->where('id','=',Auth::id())->get();
-        $devices = Device::whereHas('users', function ($q){
+        if(!$users){
+            return view('CRUD.information.onboarding');
+        }else{
+            $devices = Device::whereHas('users', function ($q){
             $q->where('id','=',Auth::id());
         })->get();
         if ($users->birthday == null){
@@ -36,6 +39,8 @@ class UserInfoController extends Controller
         }
         
         return view('CRUD.information.account',compact('users','bday','devices'));
+        }
+        
     }
 
     /**
@@ -56,22 +61,50 @@ class UserInfoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $validator = Validator::make($data = Input::all(),User_info::$rules);
         if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
+            //return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        User_info::create([
+        if($request->image){
+            //dd($request->image);
+            $this->validate($request, [
+                'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
+             ]);
+            dd($request);
+            $image = $request->file('image');
+            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/avatars');
+            $imagepath = '/avatars/'.$input['imagename'];
+            
+
+            User_info::create([
                 'first_name' => $request->fname,
                 'last_name' => $request->lname,
-                'birthday' => $request->bday,
+                'birthday' => $request->birthday,
+                'gender' => $request->gender,
+                'contact_number' => $request->contact,
+                'home_address' => $request->address,
+                'avatar_url' => $imagepath,
+                'user_id' => Auth::user()->id
+            ]);
+
+            $image->move($destinationPath, $input['imagename']);
+        }else{
+            User_info::create([
+                'first_name' => $request->fname,
+                'last_name' => $request->lname,
+                'birthday' => $request->birthday,
                 'gender' => $request->gender,
                 'contact_number' => $request->contact,
                 'home_address' => $request->address,
                 'user_id' => Auth::user()->id
-        ]);
+            ]);
 
-        return redirect('/home'); 
+        }
+
+        return redirect('/account'); 
     }
 
     /**
@@ -137,24 +170,19 @@ class UserInfoController extends Controller
         
         $searchTerm = Input::get('searchterm');
         
-        $users = User::with('information','friends')->where('parent_id',NULL)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
+        $users = User::with('information')->where('parent_id',0)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
             $q->where('first_name','LIKE','%'.$searchTerm.'%')->orWhere('last_name','LIKE','%'.$searchTerm.'%')->orWhere('username','LIKE','%'.$searchTerm.'%');
-        })->get();
-
-        $friend_ids = Friend::where('user_id',Auth::id())->pluck('friend_id')->toArray();
-        $added_id = Friend::where('friend_id',Auth::id())->pluck('user_id')->toArray();
+        })->paginate(5);
         //dd($users);
+        $friend1 = Auth::user()->friends;
+        $friend2 = $friend1->merge(Auth::user()->friendsFromOther)->modelKeys();
+        $requests = Auth::user()->friendsRequests->modelKeys();
+        $requested = Auth::user()->requested->modelKeys();
+        //dd($requests);
 
-        /*foreach ($users as $key => $user) {
-            //dd($user->friends);
-            if((count($user->friends)>0) || $user->friends->confirmed == "0" ){
-                $users->forget($key);
-            }
-        };*/
-
-        //dd($users);
+        //dd($countFriends);
         if (count($users) > 0) {
-            return view('CRUD.users.listUsersSearch',compact('users','friend_ids','added_id'));
+            return view('CRUD.users.listUsersSearch',compact('users','friend2','requests','requested'));
         }else{
             return view('CRUD.users.listUsersSearch',compact('users'))->with('status','No users found. Please search again!');
         }  

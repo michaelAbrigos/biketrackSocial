@@ -34,7 +34,7 @@
 				   	 			</div>
 				   	 			<div class="col-md-6">
 				   	 		
-				   	 				<?php if(in_array($user->id,$friend_ids)): ?>
+				   	 				<?php if(in_array($user->id,$friendRequested)): ?>
 			   	 					<div class="btn-group" style="float: right;">
 									  <button type="button" class="btn btn-raised btn-warning" disabled>Request Sent</button>
 									  <button type="button" class="btn btn-raised btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,7 +44,7 @@
 									    <a class="dropdown-item cancelRequest" href="#" value="<?php echo e($user->id); ?>">Cancel Request</a>
 									  </div>
 									</div>
-								<?php elseif(in_array($user->id,$added_id)): ?>
+								<?php elseif(in_array($user->id,$notYetRequestFriend)): ?>
 									<div class="btn-group" style="float: right;">
 									  <button type="button" class="btn btn-warning" id="confirmFriend">Confirm Request</button>
 									  <button type="button" class="btn btn-raised btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,6 +54,8 @@
 									    <a class="dropdown-item" href="#" id="declineFriend">Decline Request</a>
 									  </div>
 									</div>
+								<?php elseif(in_array($user->id,$countFriends)): ?>
+									<button type="button" class="btn btn-raised btn-warning addFriend" id="<?php echo e($user->id); ?>" value="<?php echo e($user->id); ?>" style="float: right;">View Profile</button>
 			   	 				<?php else: ?>
 			   	 					<button type="button" class="btn btn-raised btn-warning addFriend" id="<?php echo e($user->id); ?>" value="<?php echo e($user->id); ?>" style="float: right;">Add Friend</button>
 									

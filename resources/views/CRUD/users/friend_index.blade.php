@@ -5,11 +5,11 @@
   <div class="main">
   	@include('Layouts.sidebar')
 	<div class="row" style="margin-right: 0px !important">
-		<div class="col" style="padding-top: 7px; margin-left: 20px;"><h5 class="font-adam">List of friends</h5></div>
+		<div class="col" style="padding-top: 7px; margin-left: 20px;"><h5>List of friends</h5></div>
   	</div>
   	<div class="container" style="padding-top: 10px;">
 		@if(count($users) == 0)
-		<div class="alert alert-secondary" id="noPeer" role="alert">
+		<div class="alert alert-warning" id="noPeer" role="alert">
 		  Looks like you dont have any peers!
 		</div>
 		@else

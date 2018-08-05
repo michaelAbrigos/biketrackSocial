@@ -1,6 +1,6 @@
 <div class="bg">
 @include('Layouts.header')
-@include('Layouts.nav')
+@include('Layouts.nav1')
 
 @yield('content')
 

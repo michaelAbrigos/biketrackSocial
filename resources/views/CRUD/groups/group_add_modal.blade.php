@@ -12,23 +12,33 @@
 	      
 			<div class="form-group">
 	            <label for="gname" class="bmd-label-floating">Group Name</label>
-	            <input type="text" class="form-control" required id="gname">
+	            <input type="text" class="form-control" required id="name">
           	</div>
 
           	<div class="form-group">
 	            <label for="desc" class="bmd-label-floating">Description</label>
-	            <input type="text" class="form-control" required id="desc">
+	            <input type="text" class="form-control" required id="description">
           	</div>
-		
-		 	<div class="form-group">
-	            <label for="email" class="bmd-label-floating">Add Members</label>
-	            <input type="email" class="form-control" required id="members">
-        	</div>
+
+          	<div class="form-group">
+          		<label for="desc" class="bmd-label-floating">Members</label>
+				<div class="input-group">
+				<select class="custom-select" id="memberSelect">
+					<option>
+						Choose a friend...
+					</option>
+				</select>
+					<div class="input-group-prepend">
+	          			<i class="material-icons" id="add"  data-toggle="tooltip" data-placement="right" title="Add members" style="cursor: pointer;">add</i>
+	          		</div>
+				</div>
+          		<div style="padding-top: 5px;" id="addedMember"><small>Added: </small></div>
+          	</div>
 	        		
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="submit" class="btn btn-primary">Create</button>
+	        <button type="button" class="btn btn-secondary" id="closeModal">Close</button>
+	        <button type="submit" class="btn btn-primary" id="createGroup">Create</button>
 	      </div>
       </form>
     </div>

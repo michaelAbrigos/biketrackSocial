@@ -1,6 +1,7 @@
 <script>
 var friendRequest;
 $(document).ready(function(){
+
 	$(document).on('click','.addFriend',function(e){
         $.ajaxSetup({
             headers: {
@@ -17,7 +18,7 @@ $(document).ready(function(){
         var RequestedID = e.target.id; //getID of Button
         //console.log(RequestedID);
 
-        var updateURL = '/friend';
+        var updateURL = '/friends';
         //console.log(gen);
         $.ajax({
             type: "POST",
@@ -74,9 +75,6 @@ $(document).ready(function(){
             data: formData,
             dataType: 'json',
             success: function (data) {
-                var btnAdd = '<span style="display: inline-block;"><p class="text-muted">Request Confirmed</p></span>'
-                
-                $("#span"+friend_id).replaceWith(btnAdd);
 
                 var options =  {
                     content: "Friend Request Confirmed!", // text of the snackbar
@@ -84,6 +82,9 @@ $(document).ready(function(){
                     timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
                 }
                 $.snackbar(options);
+                setTimeout(function(){// wait for 1 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
                 
             },
             error: function (data) {
@@ -130,6 +131,48 @@ $(document).ready(function(){
     });
 
     $(document).on('click','#cancelRequest',function(e){
+
+    });
+
+    $(document).on('click','.unfriendConfirm',function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        e.preventDefault(); 
+        var RequestedID = e.target.id;
+        var updateURL = 'friends/'+RequestedID;
+        console.log(updateURL);
+        $.ajax({
+            type: "DELETE",
+            url: updateURL,
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                var options =  {
+                    content: "Friend removed", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                setTimeout(function(){// wait for 1 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
+                
+            },
+            error: function (data) {
+                var options =  {
+                    content: "Can't make a request at the moment", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                console.log('Error:', data);
+            }
+
+        });
 
     });
 

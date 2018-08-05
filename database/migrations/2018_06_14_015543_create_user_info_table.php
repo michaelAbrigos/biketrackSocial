@@ -26,14 +26,14 @@ class CreateUserInfoTable extends Migration
             $table->increments('id');
             $table->string('first_name', 45)->nullable();
             $table->string('last_name', 45)->nullable();
-            $table->string('birthday', 45)->nullable();
-            $table->string('gender', 45)->nullable();
-            $table->string('contact_number', 45)->nullable();
+            $table->string('birthday', 10)->nullable();
+            $table->string('gender', 6)->nullable();
+            $table->string('contact_number', 13)->nullable();
             $table->string('home_address', 255)->nullable();
-            $table->string('avatar_url', 45)->nullable();
+            $table->string('about_me',255)->nullable();
+            $table->string('avatar_url', 255)->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();
-
 
             $table->foreign('user_id')
                 ->references('id')->on('users')

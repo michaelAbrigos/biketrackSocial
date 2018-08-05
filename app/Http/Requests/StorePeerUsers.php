@@ -30,11 +30,8 @@ class StorePeerUsers extends FormRequest
     {
         return [
             'username' => 'required|string',
-            'email' => 'required|string|email',
+            'email' => 'required|string|email|',
             'password' => 'required|min:6',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'gender' => 'required|string',
         ];
     }
 }

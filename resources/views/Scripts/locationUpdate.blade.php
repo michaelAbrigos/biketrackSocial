@@ -18,7 +18,7 @@ function initMap() {
 var startplace = {lat: 14.5176, lng: 121.0509}
 var map = new google.maps.Map(
     document.getElementById('map'), 
-    {zoom: 16, center: startplace}
+    {zoom: 20, center: startplace}
 );
 
     $.ajax({

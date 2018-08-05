@@ -95,21 +95,32 @@ class LocationsController extends Controller
     public function getLocation()
     {
         $currentUser = User::where('id',Auth::id())->first();
-        if ($currentUser->parent_id == null) {
-            $user_device = User::with('devices')->where('id','=',Auth::id())->first();
-            $dev_id =  $user_device->devices[0]->id;
-        }else{
-            $user_device = User::with('devices')->where('id','=',$currentUser->parent_id)->first();
-            $dev_id =  $user_device->devices[0]->id;
-        }
-       
-        $location = Location::where('device_id',$dev_id)->orderBy('created_at', 'desc')->get(['latitude','longitude'])->first();
-        //dd($location);
-        if(!$location){
+        $hasDevice = $currentUser->devices()->where('id',Auth::id())->exists();
+        
+        if(!$hasDevice){
             return Response::json(False);
         }else{
-            return Response::json($location);
+            if ($currentUser->parent_id == null) {
+                $user_device = User::with('devices')->where('id','=',Auth::id())->first();
+                $dev_id =  $user_device->devices[0]->id;
+            }else{
+                $user_device = User::with('devices')->where('id','=',$currentUser->parent_id)->first();
+                $dev_id =  $user_device->devices[0]->id;
+            }
+       
+            $location = Location::where('device_id',$dev_id)->orderBy('created_at', 'desc')->get(['latitude','longitude'])->first();
+            //dd($location);
+            if(!$location){
+                return Response::json(False);
+            }else{
+                return Response::json($location);
+            }
         }
+
         
+    }
+
+    public function ride(){
+        return view('Ride.ride');
     }
 }

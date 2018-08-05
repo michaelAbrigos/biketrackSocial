@@ -25,8 +25,8 @@ class CreateEventsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name', 100)->nullable();
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
+            $table->date('date');
+            $table->time('time');
             $table->text('description')->nullable();
             $table->string('type', 45)->nullable();
             $table->unsignedInteger('group_id');

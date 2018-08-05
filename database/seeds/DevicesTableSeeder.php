@@ -11,7 +11,6 @@ class DevicesTableSeeder extends Seeder
      */
     public function run()
     {
-
     	for ($device_number=1; $device_number < 11; $device_number++) { 
     		$device = new Device;
     		$dname = "BTS_" . (string)$device_number;

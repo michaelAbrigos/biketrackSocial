@@ -1,12 +1,22 @@
-@font-face{
-	font-family:Adam-CG;
-	src:url('../fonts/ADAM.CG PRO.woff');
-}
+html, body {
+    margin:0;
+    padding:0;
+    height:100%; 
+ }
+
+h1,h2,h3,h4,h5,h6,p,span.h6,a,button{
+	font-family: 'Work Sans', sans-serif !important;
+}  
 
 nav{
 	z-index: 9 !important;
 	margin-left: 190px !important;
 }
+
+.btn-primary{
+	background-color: #F9AA33 !important;
+}
+
 .icon-mobile{
 	display: none;
 }
@@ -16,12 +26,19 @@ nav{
 	top: 3px;
 	right: 5px;
 }
+
+.alert-icon{
+	position: relative;
+	top:5px;
+	left: 13px;
+	z-index: -100;
+}
 .nav-color{
-	background-color: #8EAEBD !important; /* light blue color */
+	background-color: #344955 !important; /* light blue color */
 }
 
 .header-color{
-	background-color: #f67a00 !important; /* orange color */
+	background-color: #4A6572 !important /* orange color */
 }
 
 .card-head-color{
@@ -118,6 +135,19 @@ nav{
 
 .small-center{
 	padding-top: 5px;
+}
+
+.groupmember{
+	background-color: #eef;
+	border-radius: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-right:5px;
+}
+
+.removemember{
+	font-size: 8px; 
+	background-color:white;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */

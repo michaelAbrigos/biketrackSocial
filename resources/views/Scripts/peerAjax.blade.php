@@ -102,13 +102,23 @@ $(document).ready(function(){
             data: formData,
             dataType: 'json',
             success: function (data) {
-                var peerContainer = '<div class="card"><div class="card-body"><div class="row"><div class="col-md-6">';
-                peerContainer += '<img src="{{asset('avatars/male1.svg')}}" height="50px;"><p style="display: inline-block;">'+data.first_name+' '+data.last_name+'</p></div>';
-                peerContainer += '<div class="col-md-6 text-right small-center"><button type="button" class="btn btn-raised btn-success">Permission</button>';
-                peerContainer+= '<button type="button" class="btn btn-raised btn-primary" data-toggle="modal" id="pi-b" data-target="#editPeer-'+data.id+'">Edit</button><button type="button" class="btn btn-raised btn-danger">Delete</button></div>';
-                peerContainer += '</div></div></div><br>';
-
+/*                if($('#noPeer').length){
+                    $("#noPeer").remove();
+                    var peerContainer = '<div id="peerList"><div class="card"><div class="card-body"><div class="row"><div class="col-md-6">';
+                    peerContainer += '<img src="{{asset('avatars/male1.svg')}}" height="50px;"><p style="display: inline-block;">'+data.first_name+' '+data.last_name+'</p></div>';
+                    peerContainer += '<div class="col-md-6 text-right small-center"><button type="button" class="btn btn-raised btn-success">Permission</button>';
+                    peerContainer+= '<button type="button" class="btn btn-raised btn-primary" data-toggle="modal" id="pi-b" data-target="#editPeer-'+data.id+'">Edit</button><button type="button" class="btn btn-raised btn-danger">Delete</button></div>';
+                    peerContainer += '</div></div></div><br></div>';
+                    $(".container").append(peerContainer);
+                }else{
+                    var peerContainer = '<div class="card"><div class="card-body"><div class="row"><div class="col-md-6">';
+                    peerContainer += '<img src="{{asset('avatars/male1.svg')}}" height="50px;"><p style="display: inline-block;">'+data.first_name+' '+data.last_name+'</p></div>';
+                    peerContainer += '<div class="col-md-6 text-right small-center"><button type="button" class="btn btn-raised btn-success">Permission</button>';
+                    peerContainer+= '<button type="button" class="btn btn-raised btn-primary" data-toggle="modal" id="pi-b" data-target="#editPeer-'+data.id+'">Edit</button><button type="button" class="btn btn-raised btn-danger">Delete</button></div>';
+                    peerContainer += '</div></div></div><br>';
                     $("#peerList").append(peerContainer);
+
+                }*/
                 
                 
                 
@@ -120,11 +130,24 @@ $(document).ready(function(){
                     timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
                 }
                 $.snackbar(options);
-                
+                setTimeout(function(){// wait for 5 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
             },
             error: function (data) {
+                var message = data.responseJSON.message;
+                var duplicateEmail =  'SQLSTATE[23000]';
+                
+                //console.log(message.indexOf(duplicateEmail));
+                
+                //this code will check if duplicate email is in data.responseJSON.message
+                if(message.indexOf(duplicateEmail) >= 0){
+                    var con = "Email already been taken";
+                }else{
+                    var con = message;
+                }
                 var options =  {
-                      content: data.responseJSON.message, // text of the snackbar
+                    content: con, // text of the snackbar
                     style: "toast", // add a custom class to your snackbar
                     timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
                 }
@@ -132,6 +155,47 @@ $(document).ready(function(){
                 console.log('Error:', data);
             }
      });
+    });
+
+    $(document).on('click','.deletePeerConfirm',function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        e.preventDefault(); 
+        var RequestedID = e.target.id;
+        var updateURL = 'peers/'+RequestedID;
+        //console.log(gen);
+        $.ajax({
+            type: "DELETE",
+            url: updateURL,
+            data: "",
+            dataType: 'json',
+            success: function (data) {
+                var options =  {
+                    content: "Peer removed", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+
+                setTimeout(function(){// wait for 5 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
+            },
+            error: function (data) {
+                var options =  {
+                    content: "Can't make a request at the moment", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 1500 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                console.log('Error:', data);
+            }
+
+        });
+
     });
 });
 </script>

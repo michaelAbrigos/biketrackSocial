@@ -55,20 +55,8 @@ class PeersController extends Controller
             'parent_id' => Auth::id()
             ]);
 
-            $userID = $user->id;
-
-            $user_if = User_info::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'gender' => $request->gender,
-                'user_id' => $userID
-            ]); 
-        }
+           $user->assignRole('peers');
         
-        if ($user_if){
-            $user->assignRole('peers');
-            return Response::json($user->information);
-        }else{
             return Response::json($user);
         }
     }
@@ -81,7 +69,7 @@ class PeersController extends Controller
      */
     public function show($id)
     {
-        $peers = User::with('information')->role('peers')->where('id',$id)->firstOrFail();
+        $peers = User::role('peers')->where('id',$id)->firstOrFail();
         return new PeerResource($peers);
     }
 
@@ -128,6 +116,8 @@ class PeersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $peer = User::find($id);
+        $peer->delete();
+        return Response::json($peer);
     }
 }
