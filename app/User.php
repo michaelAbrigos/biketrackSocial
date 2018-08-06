@@ -46,6 +46,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\User_info');
     }
 
+    public function history(){
+        return $this->hasMany('App\History');
+    }
+
     public function devices(){
         return $this->belongsToMany('App\Device','device_user','user_id','device_id');
     }

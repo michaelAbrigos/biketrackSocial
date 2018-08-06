@@ -44,7 +44,7 @@
             </div>
         </a>
 
-        <a class="list-group-item d-flex justify-content-between" href="#">
+        <a class="list-group-item d-flex justify-content-between" href="/history">
             <div>
                 <i class="material-icons sidenav-icons">history</i>
                 <span>History</span>

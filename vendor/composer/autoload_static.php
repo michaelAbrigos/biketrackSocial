@@ -397,6 +397,7 @@ class ComposerStaticInit06bc2e0262ad2d14474099902bc5dcfa
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeviceController.php',
         'App\\Http\\Controllers\\FriendsController' => __DIR__ . '/../..' . '/app/Http/Controllers/FriendsController.php',
         'App\\Http\\Controllers\\GroupsController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupsController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',

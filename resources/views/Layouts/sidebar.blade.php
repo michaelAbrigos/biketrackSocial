@@ -12,7 +12,7 @@
 	  <a href="/groups"><i class="material-icons sidenav-icons">supervised_user_circle</i>Groups</a>
 	  <a href="/peers"><i class="material-icons sidenav-icons">person</i>Peers</a>
 	  <a href="/friends"><i class="material-icons sidenav-icons">supervisor_account</i>Friends</a>
-	  <a href="#"><i class="material-icons sidenav-icons">history</i>History</a>
+	  <a href="/history"><i class="material-icons sidenav-icons">history</i>History</a>
 	</div>
 	@endrole
 </div>

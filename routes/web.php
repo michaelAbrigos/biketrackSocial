@@ -43,5 +43,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('getFriendNotifsAjax','FriendsController@getList');
 	Route::post('confirmFriend','FriendsController@confirmFriend');
 	Route::get('getNotifs','FriendsController@getUnreadNotifs');
+
+	Route::get('history','HistoryController@showHistoryView');
+	Route::post('history','HistoryController@rangeHistory')->name('historySearch');
+	Route::get('/search','UserInfoController@search')->name('search');
 });
-Route::get('/search','UserInfoController@search')->name('search');
+
