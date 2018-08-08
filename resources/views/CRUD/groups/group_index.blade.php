@@ -89,4 +89,5 @@
  </div>
  @include('CRUD.groups.group_add_modal')
  @include('CRUD.groups.group_noFriends_modal')
+ <script type="text/javascript" src="{{asset('js/group.js')}}"></script>
  @endsection

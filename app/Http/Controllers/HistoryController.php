@@ -27,34 +27,37 @@ class HistoryController extends Controller
         $history = new History;
         $history->latitude =  $request->latitude;
         $history->longitude =  $request->longitude;
-        $history->user_id = self::checkUserParent();
+        $history->user_id = Auth::id();
         $history->save();
 
         if($history){
             return Response::json('Successfully added location',200);
         }else{
-            return Response::json('Failed to save location',401);
+            return Response::json('Failed to save location',500);
         }
         
     }
 
-    public function pointHistory(Request $request){
-        $location = History::whereHas('users',function($q){
-            $q->where('id',self::checkUserParent());
-        })->whereDate('created_at',$request->date)->whereTime('created_at',$request->time)->get();
-
-        return Response::json($location);
-    }
-
     public function rangeHistory(Request $request){
-        $location = History::whereHas('users',function($q){
-            $q->where('id',self::checkUserParent());
-        })->whereBetween('created_at',[$request->start,$request->end])->get();
 
+        if($request->end == ""){
+            $location = History::whereHas('users',function($q){
+                $q->where('id',self::checkUserParent());
+            })->where('created_at','LIKE',$request->start)->get();
+        }elseif($request->has('start') && $request->has('end')){
+            $location = History::whereHas('users',function($q){
+                $q->where('id',self::checkUserParent());
+            })->whereBetween('created_at',[$request->start,$request->end])->get();
+        }else{
+            return Response::json($request->end,422);
+        }
+        
         return Response::json($location);
     }
 
     public function showHistoryView(){
+        $user = User::with('devices')->find(2);
+        dd($user);
         return view('Ride.history');
     }
 }

@@ -30,13 +30,14 @@ var map = new google.maps.Map(
             //console.log($.trim(data));
             if(!data){
                 infoWindow = new google.maps.InfoWindow;
-
                 // Try HTML5 geolocation.
                 if (navigator.geolocation) {
                   navigator.geolocation.getCurrentPosition(function(position) {
+                    var accuracy = position.coords.accuracy;
                     var pos = {
                       lat: position.coords.latitude,
                       lng: position.coords.longitude
+                      
                     };
                     callback(pos);
 
@@ -46,8 +47,11 @@ var map = new google.maps.Map(
                     map.setCenter(pos);
                   }, function() {
                     handleLocationError(true, infoWindow, map.getCenter());
-                  });
-                } else {
+                  },{maximumAge:600000, timeout:5000, enableHighAccuracy: true}
+                
+                );} 
+    
+                else {
                   // Browser doesn't support Geolocation
                   handleLocationError(false, infoWindow, map.getCenter());
                 }

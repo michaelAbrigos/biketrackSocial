@@ -47,5 +47,7 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('history','HistoryController@showHistoryView');
 	Route::post('history','HistoryController@rangeHistory')->name('historySearch');
 	Route::get('/search','UserInfoController@search')->name('search');
+
+	Route::post('saveLocationforHistory','HistoryController@saveHistory');
 });
 

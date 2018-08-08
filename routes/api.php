@@ -22,6 +22,7 @@ Route::post('login', 'api\AuthController@login');
 Route::post('recover', 'api\AuthController@recover');
 Route::post('device','api\DeviceController@saveDevice');
 
+
 Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('logout', 'api\AuthController@logout');
     Route::get('test', function(){

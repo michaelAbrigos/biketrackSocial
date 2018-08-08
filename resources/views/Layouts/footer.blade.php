@@ -8,7 +8,6 @@
 <script type="text/javascript" src="{{asset('js/moment.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/bootstrap-material-datetimepicker.js')}}" ></script>
 <script type="text/javascript" src="{{asset('js/date.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/group.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/snackbar.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/smartWizard.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/scrollMonitor.js')}}"></script>
