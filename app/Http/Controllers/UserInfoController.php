@@ -192,5 +192,5 @@ class UserInfoController extends Controller
         $users = User::find(Auth::id());
         return new UsernameEmailResource($users);
     }
-
+    
 }

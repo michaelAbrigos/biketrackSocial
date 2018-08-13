@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\User_info;
-
+use Input;
+use Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator, DB, Hash, Mail;
@@ -33,7 +34,7 @@ class AuthController extends Controller
         
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['success'=> false, 'error'=> $validator->messages()]);
+            return response()->json(['success'=> false, 'error'=> $validator->messages()],401);
         }
 
         $username = $request->username;
@@ -51,7 +52,7 @@ class AuthController extends Controller
                 $mail->to($email, $username);
                 $mail->subject($subject);
             });
-        return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.']);
+        return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.'],200);
     }
     public function showRegistrationForm()
     {
@@ -75,7 +76,7 @@ class AuthController extends Controller
                 'message'=> 'You have successfully verified your email address.'
             ]);
         }
-        return response()->json(['success'=> false, 'error'=> "Verification code is invalid."]);
+        return response()->json(['success'=> false, 'message'=> "Verification code is invalid."]);
     }
 
     public function login(Request $request)
@@ -88,7 +89,7 @@ class AuthController extends Controller
         ];
         $validator = Validator::make($credentials, $rules);
         if($validator->fails()) {
-            return response()->json(['success'=> false, 'error'=> $validator->messages()], 401);
+            return response()->json(['success'=> false, 'message'=> $validator->messages()], 401);
         }
         
         $credentials['is_verified'] = 1;
@@ -96,14 +97,14 @@ class AuthController extends Controller
         try {
             // attempt to verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['success' => false, 'error' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 404);
+                return response()->json(['success' => false, 'message' => 'We cant find an account with this credentials. Please make sure you entered the right information and you have verified your email address.'], 401);
             }
         } catch (JWTException $e) {
             // something went wrong whilst attempting to encode the token
-            return response()->json(['success' => false, 'error' => 'Failed to login, please try again.'], 500);
+            return response()->json(['success' => false, 'message' => 'Failed to login, please try again.'], 500);
         }
         // all good so return the token
-        return response()->json(['success' => true, 'data'=> [ 'token' => $token ]], 200);
+        return response()->json(['token'=>$token], 200);
     }
     public function loginWeb(Request $request){
         
@@ -172,5 +173,45 @@ class AuthController extends Controller
             'success' => true, 'data'=> ['message'=> 'A reset email has been sent! Please check your email.']
         ]);
     }
+
+    public function informationSave(Request $request){
+
+        $validator = Validator::make($data = Input::all(),User_info::$rules);
+        
+        if($validator->fails()){
+            return response()->json(['success' => false, 'data'=> ['message'=> $validator->messages()]],401);
+        } 
+
+        User_info::create([
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'birthday' => $request->bday,
+            'gender' => $request->gender,
+            'contact_number' => $request->contact,
+            'address' => $request->address,
+            'city' => $request->city,
+            'zip_code' => $request->zipcode,
+            'user_id' => Auth::id()
+        ]);
+
+        return response()->json(['success' => true, 'data'=> ['message'=> 'Account setup successful']],200);
+    }
+
+    public function checkExists(){
+        $user = User_info::find(Auth::id());
+        $currentUser = User::find(Auth::id());
+        $hasDevice = $currentUser->devices()->where('id',Auth::id())->exists();
+        if($user && $hasDevice){
+            return response()->json(['exists'=>"Exists",'user' => $user,'has_device'=>$hasDevice],200);
+        }elseif($user && !$hasDevice){
+            return response()->json(['exists'=>"Exists",'user' => $user,'has_device'=>$hasDevice],200);
+        }elseif(!$user && $hasDevice){
+            return response()->json(['exists'=>"nope",'user' => $user,'has_device'=>$hasDevice],200);
+        }else{
+            return response()->json(['exists'=>"nope",'user' => $user,'has_device'=>$hasDevice],200);
+        }
+       
+    }
+
 
 }

@@ -8,7 +8,7 @@ class User_info extends Model
 {
     protected $table = 'user_info';
     protected $fillable = [
-        'first_name', 'last_name','gender','user_id','birthday','home_address','contact_number','avatar_url'
+        'first_name', 'last_name','gender','user_id','birthday','address','contact_number','avatar_url','city','zip_code'
     ];
     public static $rules = array(
 		'fname' => 'required|string|max:255',
@@ -16,7 +16,9 @@ class User_info extends Model
         'gender' => 'required',
         'address' => 'required|string|max:255',
         'contact' => 'required|string|min:11',
-        'birthday' => 'required',
+        'bday' => 'required',
+        'city' => 'required',
+        'zipcode' => 'required|max:4',
 
 	);
     public function user(){

@@ -29,7 +29,9 @@ class CreateUserInfoTable extends Migration
             $table->string('birthday', 10)->nullable();
             $table->string('gender', 6)->nullable();
             $table->string('contact_number', 13)->nullable();
-            $table->string('home_address', 255)->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('city', 255)->nullable();
+            $table->string('zip_code', 5)->nullable();
             $table->string('about_me',255)->nullable();
             $table->string('avatar_url', 255)->nullable();
             $table->unsignedInteger('user_id');

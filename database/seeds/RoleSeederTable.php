@@ -14,5 +14,6 @@ class RoleSeederTable extends Seeder
     {
         $role = Role::create(['name' => 'bike_user']);
         $role2 = Role::create(['name' => 'peers']);
+        $role3 = Role::create(['name' => 'admin']);
     }
 }

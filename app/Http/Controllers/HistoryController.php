@@ -56,8 +56,9 @@ class HistoryController extends Controller
     }
 
     public function showHistoryView(){
-        $user = User::with('devices')->find(2);
-        dd($user);
+        //$user = User::with('devices')->find(2);
+        //dd($user);
         return view('Ride.history');
     }
+
 }

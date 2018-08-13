@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class DeviceController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -86,7 +87,7 @@ class DeviceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource fromprotected $user;
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -95,4 +96,6 @@ class DeviceController extends Controller
     {
         //
     }
+
+    
 }
