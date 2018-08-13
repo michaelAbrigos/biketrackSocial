@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DevicesTableSeeder::class);
         $this->call(LocationsSeeder::class);
         $this->call(DeviceLocationConnector::class);
+        $this->call(PlacesTableSeeder::class);
     }
 }

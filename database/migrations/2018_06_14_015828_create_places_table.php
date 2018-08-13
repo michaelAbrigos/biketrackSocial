@@ -25,10 +25,9 @@ class CreatePlacesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name', 255);
-            $table->string('description', 255);
-            $table->string('type', 45)->nullable();
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->float('latitude','10','6');
+            $table->float('longitude','10','6');
+            $table->string('url');
             $table->timestamps();
         });
     }

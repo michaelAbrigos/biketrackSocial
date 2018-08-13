@@ -32,6 +32,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('checkInfo','api\AuthController@checkExists');
     Route::post('noDeviceHistory','api\HistoryController@rangeHistory');
     Route::get('getLocation','api\DeviceController@retrieveLatestDeviceLocation');
+    Route::get('getPlaces','api\PlacesController@getAllPlaces');
 });
 
 Route::post('/leaveGroup','GroupsController@leaveGroup');
