@@ -61,4 +61,10 @@ class HistoryController extends Controller
         return view('Ride.history');
     }
 
+    public function historyDevice(){
+        $location = Location::whereHas('device',function($q){
+            $q->where('device_id',$request->device_id);
+        })->whereBetween('created_at',[$request->start,$request->end])->get();
+    }
+
 }

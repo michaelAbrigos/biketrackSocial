@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::post('register', 'api\AuthController@register');
 Route::post('login', 'api\AuthController@login');
 Route::post('recover', 'api\AuthController@recover');
-
+Route::post('saveLocation','api\HistoryController@store');
 
 
 Route::group(['middleware' => ['jwt.auth']], function() {

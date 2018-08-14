@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\History;
 use App\User;
 use Response;
+use App\Location;
 use Auth;
 use JWTAuth;
 
@@ -58,5 +59,16 @@ class HistoryController extends Controller
         
         return Response::json(['location'=>$location],200);
     }
+
+    public function store(Request $request)
+    {
+        //dd($request);
+        $loc = new Location;
+        $loc->latitude = $request->latitude;
+        $loc->longitude = $request->longitude;
+        $loc->device_id = $request->device_id;
+        $loc->save();
+    }
+
 
 }

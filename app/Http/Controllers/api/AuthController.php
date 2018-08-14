@@ -201,8 +201,11 @@ class AuthController extends Controller
         $user = User_info::find(Auth::id());
         $currentUser = User::find(Auth::id());
         $hasDevice = $currentUser->devices()->where('id',Auth::id())->exists();
+        
+
         if($user && $hasDevice){
-            return response()->json(['exists'=>"Exists",'user' => $user,'has_device'=>$hasDevice],200);
+            $device = $currentUser->devices()->where('id',Auth::id())->first();
+            return response()->json(['exists'=>"Exists",'user' => $user,'has_device'=>$hasDevice,'device_id',$device->id],200);
         }elseif($user && !$hasDevice){
             return response()->json(['exists'=>"Exists",'user' => $user,'has_device'=>$hasDevice],200);
         }elseif(!$user && $hasDevice){

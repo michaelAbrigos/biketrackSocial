@@ -30,7 +30,7 @@ class AdminController extends Controller
     }
     //list of places
     public function displayPlaces(){
-
+    
     }
     
     public function getUpdatedLocation(){
