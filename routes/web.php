@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth'], function() {
 	
 	//Routes for updating user information.
 	Route::get('account/getUsernameEmail','UserInfoController@getUsernameEmail');
-    Route::resource('account', 'UserInfoController');
+	Route::resource('account', 'UserInfoController');
+	Route::put('/accountInfo/{id}','UserInfoController@updateInfo');
 
 	Route::resource('/device', 'DeviceController');
 	Route::resource('/groups', 'GroupsController')->only('index','store','show');

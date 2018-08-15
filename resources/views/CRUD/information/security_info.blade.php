@@ -1,8 +1,8 @@
-<div class="tab-pane fade" id="security" role="tabpanel" arialabelledby="billing-tab">
+<div class="tab-pane fade" id="device" role="tabpanel" arialabelledby="billing-tab">
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <h5>Security Information</h5>
+                <h5>Device Information</h5>
             </div>
             <!--end of col-->
         </div>
@@ -12,71 +12,59 @@
                 <div class="alert alert-info text-small" role="alert">
                     <i class="icon-user"></i>
                     <span>
-                        This information will appear on your public profile. A detailed public profile helps users with similar professional interests and location to connect with you.
+                        Add a device in order for you to get more functionalities.
                     </span>
                     <a href="#">View your public profile</a>
                 </div>
             </div>
             <!--end of col-->
             <div class="col-12 col-md-8 order-md-1">
-                <form class="row">
+                <form class="row" method="PUT">
                     <div class="col-6">
                         <div class="form-group">
-                            <label for="city">Gender:</label>
-                            <select class="custom-select mb-2 form-control-lg">
-                                <option selected>Open this select menu</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="country">Birthday:</label>
-                            <input class="form-control form-control-lg" type="text" name="bday" value="{{ $bday }}" id="date" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="address">Address:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->address }}" name="address" id="address" />
-                            <small>This will not be displayed on your public profile</small>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="address">City:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->city }}" name="city" id="city" />
-                            <small>This will not be displayed on your public profile</small>
+                            <label for="username">Device Code:
+                                    <span class="text-red">*</span>
+                                </label>
+                                @if(count($devices)==1)
+                                    <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" readonly />
+                                    <small>Enter a code to add a device</small>
+                                            
+                                @else
+                                    <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" />
+                                    <small>Enter a code to add a device</small>
+                                        
+                                @endif
+                            
                         </div>
                     </div>
                     
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="address">Zip Code:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->zip_code }}" name="zip_code" id="zip_code" />
-                            <small>This will not be displayed on your public profile</small>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="contact">Contact:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->contact_number }}" name="contact" id="website" />
-                            <small>This will not be displayed on your public profile</small>
+
+                    <div class="col-12">
+                    <div class="form-group">
+                            <button class="btn btn-secondary" name="saveInfo" id="deviceCode" >Add Device</button>
                         </div>
                     </div>
                     
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="about-me">About me:</label>
-                        <textarea class="form-control form-control-lg" rows="3" name="about_me" id="about-me">{{ $users->about_me }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <button class="btn btn-secondary" type="submit" name="saveInfo" disabled>Save changes</button>
-                        </div>
-                    </div>
+
+                    {{-- <div class="col-12">
+                        <h5>List Devices</h5>
+                        @foreach($devices as $dev)
+                            @foreach($dev as $key => $d)
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p style="display: inline-block;">{{ $d->device_name[$key]}} </p>
+                                            </div>
+                                            <div class="col-md-6 text-right small-center">
+                                                <button type="button" class="btn btn-raised btn-danger">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>	
+                                </div>
+                            @endforeach
+                        @endforeach
+                    </div> --}}
                 </form>
             </div>
             <!--end of col-->

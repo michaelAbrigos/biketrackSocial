@@ -51,22 +51,7 @@
             <!--end of col-->
             <div class="col-12 col-md-8 order-md-1">
                 <form class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="first-name">First Name:
-                                <span class="text-red">*</span>
-                            </label>
-                            <input class="form-control form-control-lg" type="text" name="fname" required  value="{{ $users->first_name}}" id="first-name" />
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="last-name">Last Name:
-                            	<span class="text-red">*</span>
-                        	</label>
-                            <input class="form-control form-control-lg" type="text" name="lname" required value="{{ $users->last_name}}" id="last-name" />
-                        </div>
-                    </div>
+                    
                     <div class="col-12">
                         <div class="form-group">
                             <label for="username">Username:
@@ -81,13 +66,14 @@
                             <label for="emailaddress">Email Address:
                                 <span class="text-red">*</span>
                             </label>
-                            <input class="form-control form-control-lg" type="email" value="{{ $users->user->email}}" name="email" required id="emailaddress" />
+                            <input class="form-control form-control-lg" type="email" readonly value="{{ $users->user->email}}" name="email" required id="emailaddress" />
                             <small>Used to log in to your account</small>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <button class="btn btn-secondary" type="submit" name="submit" disabled>Save changes</button>
+                        <input type="hidden" id="ui-id1" value="{{Auth::id()}}">
+                            <button class="btn btn-secondary" id="submitAccount" name="submit" disabled>Save changes</button>
                         </div>
                     </div>
                 </form>

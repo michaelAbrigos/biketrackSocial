@@ -2,7 +2,6 @@
 
 @section('content')
 <meta name="_token" content="{!! csrf_token() !!}" />
-<meta name="gender" value="{{$users->gender}}">
   <div class="main-container">
   	<section class="bg-white space-sm pb-4">
         <div class="container">
@@ -26,8 +25,11 @@
                                 <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#account" role="tab" aria-controls="general" aria-selected="true">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="billing-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="billing" aria-selected="false">Profile</a>
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="billing" aria-selected="false">Profile</a>
                             </li>
+                            <li class="nav-item">
+                                    <a class="nav-link" id="device-tab" data-toggle="tab" href="#device" role="tab" aria-controls="billing" aria-selected="false">Device</a>
+                                </li>
                         
                         </ul>
                     </div>

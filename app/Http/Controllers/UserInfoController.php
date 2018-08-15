@@ -24,12 +24,14 @@ class UserInfoController extends Controller
     public function index()
     {
         $users = User_info::with('user')->where('user_id','=',Auth::id())->first();
-        //$devices = Device::with('user')->where('id','=',Auth::id())->get();
+        $devices = User::with('devices')->where('id',Auth::id())->get();
+        //dd(count($devices));
         if(!$users){
             return view('CRUD.information.onboarding');
         }else{
             $devices = Device::whereHas('users', function ($q){
             $q->where('id','=',Auth::id());
+           
         })->get();
         if ($users->birthday == null){
             $bday = "";
@@ -150,7 +152,7 @@ class UserInfoController extends Controller
         $info->address = $request->address;
         $info->city = $request->city;
         $info->zip_code= $request->zip_code;
-        $info->about = $request->about_me;
+        $info->about_me = $request->about_me;
         $info->user_id = Auth::id();
        
         $info->save();
@@ -196,4 +198,21 @@ class UserInfoController extends Controller
         return new UsernameEmailResource($users);
     }
     
+    public function updateInfo(Request $request, $id)
+    {
+        $validator = $request->validate([
+            'username' => 'required'
+        ]);
+        
+        if($validator->fails()){
+           return Response::json(['Success'=>false],402);
+        }
+
+        $info = User::find($id);
+
+        $info->username = $request->username;
+        $info->save();
+
+        return Response::json($info);
+    }
 }

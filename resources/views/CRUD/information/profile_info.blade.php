@@ -21,11 +21,27 @@
             <div class="col-12 col-md-8 order-md-1">
                 <form class="row">
                     <div class="col-6">
+                            <div class="form-group">
+                                <label for="first-name">First Name:
+                                    <span class="text-red">*</span>
+                                </label>
+                                <input class="form-control form-control-lg" type="text" name="fname" required  value="{{ $users->first_name}}" id="first-name" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="last-name">Last Name:
+                                    <span class="text-red">*</span>
+                                </label>
+                                <input class="form-control form-control-lg" type="text" name="lname" required value="{{ $users->last_name}}" id="last-name" />
+                            </div>
+                        </div>
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="city">Gender:</label>
                             <select class="custom-select mb-2 form-control-lg">
-                                <option selected>Open this select menu</option>
-                                <option value="Male">Male</option>
+            
+                                <option id="gender1" value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
@@ -33,7 +49,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="country">Birthday:</label>
-                            <input class="form-control form-control-lg" type="text" name="bday" value="{{ $bday }}" id="date" />
+                            <input class="form-control form-control-lg" type="text" name="bday" value="{{ $users->birthday }}" id="date" />
                         </div>
                     </div>
                     <div class="col-6">
@@ -46,7 +62,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="address">City:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->city }}" name="address" id="address" />
+                            <input class="form-control form-control-lg" type="text" value="{{ $users->city }}" name="address" id="city" />
                             <small>This will not be displayed on your public profile</small>
                         </div>
                     </div>
@@ -54,14 +70,14 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="address">Zip Code:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->zip_code }}" name="address" id="address" />
+                            <input class="form-control form-control-lg" type="text" value="{{ $users->zip_code }}" name="address" id="zipcode" />
                             <small>This will not be displayed on your public profile</small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="contact">Contact:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->contact_number }}" name="contact" id="website" />
+                            <input class="form-control form-control-lg" type="text" value="{{ $users->contact_number }}" name="contact" id="contact" />
                             <small>This will not be displayed on your public profile</small>
                         </div>
                     </div>
@@ -72,17 +88,11 @@
                             <textarea class="form-control form-control-lg" name="profileBio" rows="4" id="about-me">{{ $users->about_me }}</textarea>
                         </div>
                     </div>
+                
                     <div class="col-12">
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox custom-checkbox-switch">
-                                <input type="checkbox" class="custom-control-input" name="profilePublic" id="public" />
-                                <label class="custom-control-label" for="public">Make my profile public</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <button class="btn btn-secondary" type="submit" disabled>Save changes</button>
+                        <input type="hidden" id="ui-id" value="{{Auth::id()}}">
+                            <button class="btn btn-secondary" id="submitProfile" type="submit">Save changes</button>
                         </div>
                     </div>
                 </form>

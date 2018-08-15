@@ -6,9 +6,7 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-12 col-md-6 col-lg-5 section-intro">
                     <h1 class="display-3">Track your Bike</h1>
-                    <span class="lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                    </span>
+
                 </div>
                 <!--end of col-->
                 <div class="col-12 col-md-6 col-lg-5">
