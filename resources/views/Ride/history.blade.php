@@ -53,8 +53,12 @@
                                     <input type="text" placeholder="End date" class="form-control list-group-item date" id="end">
                             </div>
                             <div class="card-footer text-right">
+                                @if($device == null)
+                                @else
                                 <input type="hidden" name="device_id" id="device_id" value="{{$device->id}}">
                                 <a class="btn btn-warning" id="submit">Search</a>
+                                @endif
+                                
                             </div>
                         </form>
                     </div>

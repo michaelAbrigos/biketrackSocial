@@ -56,7 +56,7 @@ class HistoryController extends Controller
         $device = Device::whereHas('users', function($q){
             $q->where('id',Auth::id());
         })->first();
-
+        
 
         return view('Ride.history',compact('device'));
     }

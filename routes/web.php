@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 //Route::post('login','api\AuthController@loginWeb');
+Route::get('/admin/login','AdminController@login');
 
 Route::get('user/verify/{verification_code}', 'api\AuthController@verifyUser');
 
