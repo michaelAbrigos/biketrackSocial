@@ -70,5 +70,13 @@ class HistoryController extends Controller
         $loc->save();
     }
 
+    public function historyDevice(Request $request){
+        $location = Location::whereHas('device',function($q) use($request){
+            $q->where('device_id',$request->device_id);
+        })->whereBetween('created_at',[$request->start,$request->end])->get();
+
+        return Response::json(['location'=>$location],200);
+    }
+
 
 }

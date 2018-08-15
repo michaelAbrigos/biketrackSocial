@@ -35,4 +35,4 @@ setInterval(function(){
     }
 
     //intervals for refresh and get request.
-}, 20000);
+}, 120000);

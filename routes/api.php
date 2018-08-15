@@ -33,6 +33,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('noDeviceHistory','api\HistoryController@rangeHistory');
     Route::get('getLocation','api\DeviceController@retrieveLatestDeviceLocation');
     Route::get('getPlaces','api\PlacesController@getAllPlaces');
+    Route::post('DeviceHistory','api\HistoryController@historyDevice');
 });
 
 Route::post('/leaveGroup','GroupsController@leaveGroup');
@@ -42,8 +43,3 @@ Route::get('item/{id}', 'ItemController@show');
 Route::post('item', 'ItemController@store');
 Route::put('item/{id}', 'ItemController@update');
 Route::get('item/delete/{id}', 'ItemController@delete');
-
-
-
-
-

@@ -175,6 +175,14 @@ $('input[name="fname"],input[name="lname"],input[name="username"],input[name="em
     }
 });
 
+$('input[name="bday"],input[name="address"],input[name="city"],input[name="zip_code"]','input[name="contact"]').change(function(){
+    if($(this).val()){
+        console.log($(this).val());
+        $('button[name="saveInfo"]').prop("disabled",false);
+    }else{
+        $('button[name="saveInfo"]').prop("disabled",true);
+    }
+});
 
 
 </script>

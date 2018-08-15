@@ -28,12 +28,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="billing-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="billing" aria-selected="false">Profile</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security" aria-selected="false">Security</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab" aria-controls="notifications" aria-selected="false">Notifications</a>
-                            </li>
+                        
                         </ul>
                     </div>
                     <!--end of col-->
@@ -47,6 +42,7 @@
         <div class="tab-content">
             @include('CRUD.information.account_info')
             @include('CRUD.information.profile_info')
+            @include('CRUD.information.security_info')
 		</div>
 	</section>
 </div>

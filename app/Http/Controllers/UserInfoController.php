@@ -147,7 +147,10 @@ class UserInfoController extends Controller
         $info->gender = $request->gender;
         $info->contact_number = $request->contact_number;
         $info->birthday = $request->birthday;
-        $info->home_address = $request->home_address;
+        $info->address = $request->address;
+        $info->city = $request->city;
+        $info->zip_code= $request->zip_code;
+        $info->about = $request->about_me;
         $info->user_id = Auth::id();
        
         $info->save();

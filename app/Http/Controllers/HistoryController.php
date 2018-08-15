@@ -5,6 +5,7 @@ use App\History;
 use App\User;
 use Response;
 use Auth;
+use App\Location;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -41,18 +42,18 @@ class HistoryController extends Controller
     public function rangeHistory(Request $request){
 
         if($request->end == ""){
-            $location = History::whereHas('users',function($q){
+            $location = Location::whereHas('users',function($q){
                 $q->where('id',self::checkUserParent());
             })->where('created_at','LIKE',$request->start)->get();
         }elseif($request->has('start') && $request->has('end')){
-            $location = History::whereHas('users',function($q){
+            $location = Location::whereHas('users',function($q){
                 $q->where('id',self::checkUserParent());
             })->whereBetween('created_at',[$request->start,$request->end])->get();
         }else{
             return Response::json($request->end,422);
         }
         
-        return Response::json($location);
+        return Response::json([$location],200);
     }
 
     public function showHistoryView(){
@@ -61,10 +62,6 @@ class HistoryController extends Controller
         return view('Ride.history');
     }
 
-    public function historyDevice(){
-        $location = Location::whereHas('device',function($q){
-            $q->where('device_id',$request->device_id);
-        })->whereBetween('created_at',[$request->start,$request->end])->get();
-    }
+    
 
 }

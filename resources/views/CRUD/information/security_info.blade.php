@@ -1,8 +1,8 @@
-<div class="tab-pane fade" id="profile" role="tabpanel" arialabelledby="billing-tab">
+<div class="tab-pane fade" id="security" role="tabpanel" arialabelledby="billing-tab">
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <h5>Profile Information</h5>
+                <h5>Security Information</h5>
             </div>
             <!--end of col-->
         </div>
@@ -46,7 +46,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="address">City:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->city }}" name="address" id="address" />
+                            <input class="form-control form-control-lg" type="text" value="{{ $users->city }}" name="city" id="city" />
                             <small>This will not be displayed on your public profile</small>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label for="address">Zip Code:</label>
-                            <input class="form-control form-control-lg" type="text" value="{{ $users->zip_code }}" name="address" id="address" />
+                            <input class="form-control form-control-lg" type="text" value="{{ $users->zip_code }}" name="zip_code" id="zip_code" />
                             <small>This will not be displayed on your public profile</small>
                         </div>
                     </div>
@@ -69,20 +69,12 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="about-me">About me:</label>
-                            <textarea class="form-control form-control-lg" name="profileBio" rows="4" id="about-me">{{ $users->about_me }}</textarea>
+                        <textarea class="form-control form-control-lg" rows="3" name="about_me" id="about-me">{{ $users->about_me }}</textarea>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <div class="custom-control custom-checkbox custom-checkbox-switch">
-                                <input type="checkbox" class="custom-control-input" name="profilePublic" id="public" />
-                                <label class="custom-control-label" for="public">Make my profile public</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <button class="btn btn-secondary" type="submit" disabled>Save changes</button>
+                            <button class="btn btn-secondary" type="submit" name="saveInfo" disabled>Save changes</button>
                         </div>
                     </div>
                 </form>
