@@ -128,7 +128,7 @@ class PlacesTableSeeder extends Seeder
         $place17->name= "Kinabuan Falls";
         $place17->latitude = "14.7592897";
         $place17->longitude = "121.3192293";
-        $place17->url = "img/Kinabuan.JPG.jpg";
+        $place17->url = "img/Kinabuan.jpg";
         $place17->save();
 
         $place18 = new Place();

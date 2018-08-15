@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 //Route::post('login','api\AuthController@loginWeb');
-Route::get('/admin/login','AdminController@login');
 
 Route::get('user/verify/{verification_code}', 'api\AuthController@verifyUser');
 
@@ -60,5 +59,14 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::get('/search','UserInfoController@search')->name('search');
 
 	Route::post('saveLocationforHistory','HistoryController@saveHistory');
+});
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/bikeUsers','AdminController@viewBikeUsers');
+    Route::get('/peers','AdminController@viewPeers');
+    Route::get('/location','AdminController@viewLocation');
+    Route::get('/places','AdminController@viewPlaces');
+    Route::get('/groups','AdminController@viewGroups');
+    Route::get('/devices','AdminController@viewDevices');
 });
 

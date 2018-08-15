@@ -4,40 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Device;
+use App\Place;
+use App\Location;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class AdminController extends Controller
 {
-    public function getNumberBikers(){
-        $user = User::role('bike_user')->get();
-        return Response::json($user);
-    }
+   public function viewBikeUsers(){
+        $users = User::role('bike_user')->get();
+        $verified = User::role('bike_user')->where('is_verified',1)->get();
+        $unverified = User::role('bike_user')->where('is_verified',0)->get();
+        return view('admin.bikeuser',compact('verified','unverified','users'));
+   }
 
-    public function getNumberPeers(){
-        $peer = User::role('Peers')->get();
-        return Response::json($peer);
-    }
+   public function viewPeers(){
+        $users = User::role('peers')->get();
+        $verified = User::role('peers')->where('is_verified',1)->get();
+        $unverified = User::role('peers')->where('is_verified',0)->get();
+        return view('admin.peer',compact('verified','unverified','users'));
+   }
 
-    public function getNumberWithDevice(){
-        $device = User::with('devices')->get();
-        return Response::json($device);
-    }
+   public function viewLocation(){
+        $locations = Location::all();
+        return view('admin.location',compact('locations'));
+   }
 
-    //allow admins to add a place for user to check and view
-    public function addPlaces(Request $request){
-        
-    }
-    //list of places
-    public function displayPlaces(){
-    
-    }
-    
-    public function getUpdatedLocation(){
+   public function viewPlaces(){
+        $places = Place::all();
+        return view('admin.place',compact('places'));
+   }
 
-    }
-    //gets last known location of non device users.
-    public function getUpdatedHistoryUser(){
+   public function viewGroups(){
+        $places = Place::all();
+        return view('admin.place',compact('places'));
+   }
 
-    }
+   public function viewDevices(){
+        $places = Place::all();
+        return view('admin.place',compact('places'));
+   }
+
 }

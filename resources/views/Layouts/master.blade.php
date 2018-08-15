@@ -1,8 +1,6 @@
-<div class="bg">
 @include('Layouts.header')
 <meta name="_token" content="{!! csrf_token() !!}" />
 @include('Layouts.nav1')
-
 
 @yield('content')
 
