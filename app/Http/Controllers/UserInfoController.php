@@ -24,8 +24,10 @@ class UserInfoController extends Controller
     public function index()
     {
         $users = User_info::with('user')->where('user_id','=',Auth::id())->first();
-        $devices = User::with('devices')->where('id',Auth::id())->get();
-        //dd(count($devices));
+        $device = Device::whereHas('users', function($q){
+            $q->where('id',Auth::id());
+        })->first();
+        //dd($device);
         if(!$users){
             return view('CRUD.information.onboarding');
         }else{
@@ -40,7 +42,7 @@ class UserInfoController extends Controller
             $bday = date_format($date,"M. d, Y"); 
         }
         
-        return view('CRUD.information.account',compact('users','bday','devices'));
+        return view('CRUD.information.account',compact('users','bday','device'));
         }
         
     }
@@ -64,48 +66,23 @@ class UserInfoController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        $validator = Validator::make($data = Input::all(),User_info::$rules);
+        /*$validator = Validator::make($data = Input::all(),User_info::$rules);
         if($validator->fails()){
-            //return redirect()->back()->withErrors($validator)->withInput();
-        }
+            return redirect()->back()->withErrors($validator)->withInput();
+        }*/
 
-        if($request->image){
-            //dd($request->image);
-            $this->validate($request, [
-                'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-             ]);
-            dd($request);
-            $image = $request->file('image');
-            $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/avatars');
-            $imagepath = '/avatars/'.$input['imagename'];
+        User_info::create([
+            'first_name' => $request->fname,
+            'last_name' => $request->lname,
+            'birthday' => $request->birthday,
+            'gender' => $request->gender,
+            'contact_number' => $request->contact,
+            'address' => $request->address,
+            'city' => $request->city,
+            'zip_code' => $request->zip_code,
+            'user_id' => Auth::user()->id
+        ]);
             
-
-            User_info::create([
-                'first_name' => $request->fname,
-                'last_name' => $request->lname,
-                'birthday' => $request->birthday,
-                'gender' => $request->gender,
-                'contact_number' => $request->contact,
-                'home_address' => $request->address,
-                'avatar_url' => $imagepath,
-                'user_id' => Auth::user()->id
-            ]);
-
-            $image->move($destinationPath, $input['imagename']);
-        }else{
-            User_info::create([
-                'first_name' => $request->fname,
-                'last_name' => $request->lname,
-                'birthday' => $request->birthday,
-                'gender' => $request->gender,
-                'contact_number' => $request->contact,
-                'home_address' => $request->address,
-                'user_id' => Auth::user()->id
-            ]);
-
-        }
-
         return redirect('/account'); 
     }
 
@@ -175,7 +152,7 @@ class UserInfoController extends Controller
         
         $searchTerm = Input::get('searchterm');
         
-        $users = User::with('information')->where('parent_id',0)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
+        $users = User::with('information')->role('bike_user')->where('parent_id',0)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($searchTerm){
             $q->where('first_name','LIKE','%'.$searchTerm.'%')->orWhere('last_name','LIKE','%'.$searchTerm.'%')->orWhere('username','LIKE','%'.$searchTerm.'%');
         })->paginate(5);
         //dd($users);

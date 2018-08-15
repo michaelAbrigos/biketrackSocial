@@ -34,6 +34,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('getLocation','api\DeviceController@retrieveLatestDeviceLocation');
     Route::get('getPlaces','api\PlacesController@getAllPlaces');
     Route::post('DeviceHistory','api\HistoryController@historyDevice');
+    Route::get('device','api\DeviceController@getDeviceFromUser');
 });
 
 Route::post('/leaveGroup','GroupsController@leaveGroup');

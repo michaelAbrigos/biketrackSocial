@@ -59,6 +59,7 @@ function initMap() {
           }else{
             clearMarkers();
           	var myLocation = {lat: data.latitude , lng: data.longitude};
+            position1 = myLocation;
             var marker = new google.maps.Marker({position: myLocation, map: map});
             markerArray.push(marker);
             marker.setMap(map);

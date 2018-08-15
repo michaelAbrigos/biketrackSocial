@@ -1,36 +1,6 @@
 <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="general-tab">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="media flex-wrap mb-0 align-items-center">
-                    @if($users->avatar_url)
-                        <img alt="Image" src="{{asset($users->avatar_url)}}" class="avatar avatar-lg mb-3 mb-md-0" />
-                    @else
-                        @if($users->gender == "Male")
-                            <img alt="Image" src="{{asset('/avatars/male1.svg')}}" class="avatar avatar-lg mb-3 mb-md-0" />
-                        @else
-                            <img alt="Image" src="{{asset('/avatars/female.svg')}}" class="avatar avatar-lg mb-3 mb-md-0" />
-                        @endif
-                    
-                    @endif
-                    
-                    <div class="media-body">
-                        <form>
-                            <label class="custom-file mb-2" for="file2">
-                                <input type="file" id="file2" class="custom-file-input height-0">
-                                <span class="btn btn-warning"><i class="material-icons" style="font-size: 16px; top: 2px; position: relative;">cloud_upload</i> Upload</span>
-                            </label>
-                            <div>
-                                <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--end of col-->
-        </div>
         <!--end of row-->
-        <hr>
         <div class="row mb-4">
             <div class="col">
                 <h5>Account Details</h5>

@@ -6,6 +6,8 @@ use Response;
 use App\Device;
 use App\Device_user;
 use App\Http\Requests\AddDevices;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -18,7 +20,8 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        
+         
+
     }
 
     /**
@@ -45,6 +48,8 @@ class DeviceController extends Controller
             //dd($device);        
             if (count($device) == 1) {
                 $device->users()->attach(Auth::id());
+                $curUser = User::find(Auth::id());
+                $curUser->givePermissionTo('Search History');
                 return Response::json($device);
             }else{
                 return false;

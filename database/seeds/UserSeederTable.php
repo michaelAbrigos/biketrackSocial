@@ -24,6 +24,7 @@ class UserSeederTable extends Seeder
         $user1->parent_id = 0;
         $user1->save();
         $user1->assignRole('bike_user');
+        $user1->givePermissionTo('View Map');
 
         $user2 = new User();
         $user2->username = "BTS_user2";
@@ -33,6 +34,7 @@ class UserSeederTable extends Seeder
         $user2->parent_id = 0;
         $user2->save();
         $user2->assignRole('bike_user');
+        $user2->givePermissionTo('View Map');
 
         $user3 = new User();
         $user3->username = "BTS_user3";
@@ -42,6 +44,7 @@ class UserSeederTable extends Seeder
         $user3->parent_id = 0;
         $user3->save();
         $user3->assignRole('bike_user');
+        $user3->givePermissionTo('View Map');
 
         $user4 = new User();
         $user4->username = "admin";
@@ -51,6 +54,18 @@ class UserSeederTable extends Seeder
         $user4->parent_id = 0;
         $user4->save();
         $user4->assignRole('admin');
+        $user4->givePermissionTo('View Map');
+
+        $user5 = new User();
+        $user5->username = "BTS_user4";
+        $user5->email = "user4@gmail.com";
+        $user5->password = Hash::make("123456");
+        $user5->is_verified = 1;
+        $user5->parent_id = 0;
+        $user5->save();
+        $user5->assignRole('bike_user');
+        $user5->givePermissionTo('View Map');
+
 
 
         //information for users and admin

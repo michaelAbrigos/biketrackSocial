@@ -15,11 +15,11 @@
 			                            <div class="card card-lg text-center">
 			                                <div class="card-body">
 			                                    <i class="material-icons opacity-20 display-4">person_add</i>
-			                                    <h1 class="h5">You haven't created anything yet</h1>
+			                                    <h1 class="h5">You dont have any friends yet!</h1>
 			                                    <p>
-			                                        Start creating all types of things by hitting the button below. Let's start the journey now
+			                                        Go ahead and search for someone in the search bar above.
 			                                    </p>
-			                                    <button class="btn btn-success">So sad :(</button>
+			                                 
 			                                </div>
 			                            </div>
 			                        </div>

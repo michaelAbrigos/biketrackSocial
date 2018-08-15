@@ -15,14 +15,17 @@ class DeviceLocationConnector extends Seeder
     	try {
     		$user1 = User::find(1);
 	        $device1 = Device::find(1);
+            $user1->givePermissionTo('Search History');
 	        $device1->users()->attach($user1->id);
 
 	        $user2 = User::find(2);
 	        $device2 = Device::find(2);
+            $user2->givePermissionTo('Search History');
 	        $device2->users()->attach($user2->id);
 
 	        $user3 = User::find(3);
 	        $device3 = Device::find(3);
+            $user3->givePermissionTo('Search History');
 	        $device3->users()->attach($user3->id);
     		
     	} catch (Exception $e) {

@@ -22,6 +22,7 @@
                 </div>
         	</div>
         	<div class="col-12 col-md-3 mb-1 order-md-1 mt-3">
+
         		<div class="card">
         			<div class="card-header text-white nav-color">
 				        <span class="h6">Enter Location</span>
@@ -29,7 +30,7 @@
         			<form>
         				<div class="list-group list-group-flush">
 	                		<div class="form-group justify-content-between list-group-item" id="pac-card">
-	                            <input type="text" placeholder="Start Location" value="Your Location" id="start" name="start" class="form-control form-control-lg" required/>
+	                            <input type="text" placeholder="Start Location" id="start" name="start" class="form-control form-control-lg" required/>
 	                        </div>
 	                    	<div class="form-group justify-content-between list-group-item">
 	                            <input type="text" placeholder="Destination" name="end" id="end" class="form-control form-control-lg" required />
@@ -38,18 +39,7 @@
                         </div>	 	
         			</form>
         		</div>
-        		<div class="card">
-        			<div class="card-header text-white nav-color">
-				        <span class="h6">Route Information</span>
-				    </div>
-        			<form>
-        				<div class="list-group list-group-flush">
-	                		<p class="list-group-item">Distance</p>
-	                    	<p class="list-group-item">Time</p>	
-                        </div>	 	
-        			</form>
-        		</div>
-	            
+	            @include('Layouts.newSidebar')
 	        </div>
         </div>
     </div>

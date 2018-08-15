@@ -71,6 +71,78 @@ $(document).ready(function(){
 
     });
 
+    $(document).on("click",'.addPerm',function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        e.preventDefault(); 
+        
+        url = '/peers/request/addPerm';
+
+        var formData = {
+            peer_id: $(this).attr("name"),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                var options =  {
+                    content: "Permission Updated!", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                setTimeout(function(){// wait for 5 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
+            },error: function (data) {
+                console.log(data)
+            }
+     });
+   });
+
+    $(document).on("click",'.removePerm',function(e){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+        e.preventDefault(); 
+        
+        url = '/peers/request/removePerm';
+
+        var formData = {
+            peer_id: $(this).attr("name"),
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+                 var options =  {
+                    content: "Permission Updated!", // text of the snackbar
+                    style: "toast", // add a custom class to your snackbar
+                    timeout: 2000 // time in milliseconds after the snackbar autohides, 0 is disabled
+                }
+                $.snackbar(options);
+                setTimeout(function(){// wait for 5 secs(2)
+                   location.reload(); // then reload the page.(3)
+              }, 1000); 
+            },error: function (data) {
+                console.log(data)
+            }
+     });
+   });
+
     $(document).on("click",'#addPeer',function(e){
         $.ajaxSetup({
             headers: {

@@ -22,14 +22,14 @@
                     </ul>
                     @else
                     <form class="form-inline col p-0 pl-md-2 pr-md-3" style="margin-bottom: 0px !important" action="{{route('search')}}" method="get">
-                        <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search">
+                        <input class="form-control w-50" type="search" placeholder="Search" aria-label="Search" name="searchterm">
                     </form>
                     <ul class="navbar-nav">
                         <li class="nav-item" style="padding-top: 5px;">
                             <a href="{{route('home')}}">Home</a>
                         </li>
                         <li class="nav-item dropdown" style="padding-right: 10px;">
-                            <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="material-icons alert-icon">notifications</i>
                                 <span class="badge badge-danger">{{ count(Auth::user()->unreadNotifications) }}</span>
                             </a>

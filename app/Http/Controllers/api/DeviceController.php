@@ -59,4 +59,11 @@ class DeviceController extends Controller
             }
         }
     }
+
+    public function getDeviceFromUser(){
+        $device = Device::whereHas('users', function($q){
+            $q->where('id',Auth::id());
+        })->get();
+        return Response::json($device);     
+    }
 }

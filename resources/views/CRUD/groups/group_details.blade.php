@@ -22,18 +22,18 @@
                 </div>
                 <!--end of col-->
                 <div class="col-12 col-md-3 mb-1 order-md-1">
-                    @include('Layouts.newSidebar')
+                   
                     <div class="card card-sm">
-                    	<div class="card-header">
+                    	<div class="card-header nav-color text-white">
 					        <span class="h6">Group Members</span>
 					    </div>
 					    <div class="list-group list-group-flush">
 					        @foreach($information as $member)
 					        <div class="list-group-item d-flex justify-content-between">
-								<div class="custom-control custom-checkbox-switch">
-	                                <input type="checkbox" class="custom-control-input" id="custom-switch-{{$member->id}}">
-	                                <label class="custom-control-label" for="custom-switch-{{$member->id}}">{{$member->information->first_name}} {{$member->information->last_name}}</label>
-	                            </div>
+								
+	                                
+	                                <p class="" for="custom-switch-{{$member->id}}">{{$member->information->first_name}} {{$member->information->last_name}}</p>
+	                            
 		  					</div>		
 	  						@endforeach            
 					    </div>

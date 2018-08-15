@@ -62,7 +62,7 @@
                                             <div class="col-12 col-md-6 col-lg-5 mb-4">
                                                 <div>
                                                     <h6 class="title-decorative mb-2">Step 2.</h6>
-                                                    <h4 class="mb-2">Home Address</h4>
+                                                    <h4 class="mb-2">Address</h4>
                                                     <p>This is especially important for some notifications</p>
                                                     <div class="row">
                                                     	<div class="col">
@@ -70,7 +70,18 @@
 		                                                        <input type="text" placeholder="Address" name="address" class="form-control form-control-lg" required/>
 		                                                        <small>This will be used for some features on this website</small>
 		                                                    </div>
+
                                                     	</div>
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <input type="text" placeholder="City" name="city" class="form-control form-control-lg" required/>
+                                                                <small>This will be used for some features on this website</small>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" placeholder="Zip Code" name="zip_code" class="form-control form-control-lg" required/>
+                                                                <small>This will be used for some features on this website</small>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button class="btn btn-success sw-btn-next mt-4" type="button">Next Step</button>
@@ -105,14 +116,6 @@
                                                     <div class="form-group">
 		                                                <input type="text" placeholder="Contact" name="contact" class="form-control form-control-lg" required />
 		                                            </div>
-		                                            <div class="form-group">
-		                                            	<p>Profile Avatar</p>
-			                                            <label class="custom-file mb-2" for="file2">
-							                                <input type="file" id="file2" name="image" class="custom-file-input height-0">
-							                                <span class="btn btn-primary"><i class="material-icons" style="font-size: 16px; top: 2px; position: relative;">cloud_upload</i> Upload</span>
-							                            </label>
-							                            <small>For best results, use an image at least 256px by 256px in either .jpg or .png format</small>
-						                        	</div>
                             
                                 
                             

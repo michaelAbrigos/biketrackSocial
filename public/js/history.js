@@ -22,8 +22,9 @@ submit.addEventListener('click',function(e){
     var formData = {
         start: $('#start').val(),
         end: $('#end').val(),
+        device_id : $('#device_id').val()
     }
-
+    console.log(formData);
     $.ajax({
         type:"POST",
         url : "/history",

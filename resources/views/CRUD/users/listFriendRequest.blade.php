@@ -82,4 +82,6 @@
         <!--end of container-->
    
  </div>
+@include('Scripts.addFriendAjax')
+ 
 @endsection

@@ -9,4 +9,5 @@ class Location extends Model
     public function device(){
         return $this->belongsTo('App\Device');
     }
+
 }

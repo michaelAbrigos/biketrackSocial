@@ -111,6 +111,6 @@
     
  </div>
 
-
+@include('Scripts.addFriendAjax')
 
 @endsection

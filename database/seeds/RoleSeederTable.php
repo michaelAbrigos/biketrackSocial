@@ -15,5 +15,7 @@ class RoleSeederTable extends Seeder
         $role = Role::create(['name' => 'bike_user']);
         $role2 = Role::create(['name' => 'peers']);
         $role3 = Role::create(['name' => 'admin']);
+        $permission1 = Permission::create(['name'=>'View Map']);
+        $permission2 = Permission::create(['name'=>'Search History']);
     }
 }

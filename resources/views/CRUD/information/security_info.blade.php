@@ -25,10 +25,10 @@
                             <label for="username">Device Code:
                                     <span class="text-red">*</span>
                                 </label>
-                                @if(count($devices)==1)
+                                @if($device)
                                     <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" readonly />
-                                    <small>Enter a code to add a device</small>
-                                            
+                                    <small>You have successfully added a device already</small>
+                                    
                                 @else
                                     <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" />
                                     <small>Enter a code to add a device</small>
@@ -44,6 +44,21 @@
                             <button class="btn btn-secondary" name="saveInfo" id="deviceCode" >Add Device</button>
                         </div>
                     </div>
+
+
+                    @if($device)
+                        <div class="col-6">
+                            <br>
+                            <div class="card">
+                                <div class="card-header header-color"><h5 style="color:white">List of Device</h5></div>
+                                <div class="card-body">
+                                    <p>{{$device->device_name}}</p>
+                                </div>
+                                <div class="card-footer"><small class="text-muted">Date Added: {{$device->created_at}}</small></div>
+                            </div>
+                        </div>
+                    @else
+                    @endif
                     
 
                     {{-- <div class="col-12">

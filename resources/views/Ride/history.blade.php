@@ -12,16 +12,40 @@
                                 <h6>Real Time Location</h6>
                             </div>
                         </div>
+                        @can('Search History')
                         <div class="list-group list-group-flush" style="height: 420px;">
                             <div id="map"></div>
                         </div>
+                        @else
+                            <section class="height-70">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12 col-md-6 col-lg-5">
+                                            <div class="card card-lg text-center">
+                                                <div class="card-body">
+                                                    <i class="material-icons opacity-20 display-4">map</i>
+                                                    <h1 class="h5">Looks like you dont have a device for us to save your location</h1>
+                                                    <p>
+                                                        Please add a device in order for us to save your location and show your bike loaction history
+                                                    </p>
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end of col-->
+                                    </div>
+                                    <!--end of row-->
+                                </div>
+                                <!--end of container-->
+                            </section>
+                        @endcan
                     </div>
                 </div>
                 <!--end of col-->
                 <div class="col-12 col-md-3 mb-1 order-md-1">
                     <div class="card">
                         <form>
-                            <div class="card-header">Enter Date and Time</div>
+                            <div class="card-header nav-color"><h6 class="text-white">Enter Date and Time</h6></div>
                             <div class="form-group list-group list-group-flush">
                                 <input type="text" placeholder="Start date" class="form-control list-group-item date" id="start">
                             </div>
@@ -29,6 +53,7 @@
                                     <input type="text" placeholder="End date" class="form-control list-group-item date" id="end">
                             </div>
                             <div class="card-footer text-right">
+                                <input type="hidden" name="device_id" id="device_id" value="{{$device->id}}">
                                 <a class="btn btn-warning" id="submit">Search</a>
                             </div>
                         </form>

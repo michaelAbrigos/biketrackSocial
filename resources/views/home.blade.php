@@ -4,6 +4,8 @@
 
 <div class="main-container">
 
+    @can('View Map')
+
         <div class="container mt-4">
             <div class="row">
                 <div class="col-12 col-md-9 mb-1 order-md-2">
@@ -27,7 +29,30 @@
             <!--end of row-->
         </div>
         <!--end of container-->
-       
+       @else
+            <section class="height-70">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <div class="card card-lg text-center">
+                                <div class="card-body">
+                                    <i class="material-icons opacity-20 display-4">map</i>
+                                    <h1 class="h5">Looks like you dont have access for tracking your Bike User</h1>
+                                    <p>
+                                        Contact your peer for permission.
+                                    </p>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                    <!--end of row-->
+                </div>
+                <!--end of container-->
+            </section>
+       @endcan
+
 </div>
 
 @include('Scripts.locationUpdate')

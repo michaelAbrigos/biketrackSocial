@@ -21,9 +21,34 @@ class PeersController extends Controller
      */
     public function index()
     {
-        $users = User::with('information')->role('peers')->where('parent_id',Auth::id())->get();
+        $user = User::role('peers')->where('parent_id',Auth::id())->get();
+        $users = User::role('peers')->permission('View Map')->where('parent_id',Auth::id())->get();
+
+        return view('CRUD.users.peer_index',compact('users','user'));
+    }
+
+    public function PeerNo(){
+        $users = User::role('peers')->where('parent_id',Auth::id())->get();
         //dd($users);
-        return view('CRUD.users.peer_index',compact('users'));
+        $user = User::role('peers')->permission('View Map')->where('parent_id',Auth::id())->get();
+        $keys = $user->keys()->toArray();
+        //dd($users);
+
+        $users->forget($keys);
+        //dd($users);
+        return view('CRUD.users.peerNo',compact('users','user'));
+    }
+
+    public function removePerm(Request $request){
+        $user = User::find($request->peer_id);
+        $user->revokePermissionTo('View Map');
+        return Response::json($user);
+    }
+
+    public function addPerm(Request $request){
+        $user = User::find($request->peer_id);
+        $user->givePermissionTo('View Map');
+        return Response::json($user);
     }
 
     /**
@@ -52,10 +77,12 @@ class PeersController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'parent_id' => Auth::id()
+            'parent_id' => Auth::id(),
+            'is_verified' => 1
             ]);
 
            $user->assignRole('peers');
+           $user->givePermissionTo('View Map');
         
             return Response::json($user);
         }
