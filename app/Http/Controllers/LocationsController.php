@@ -97,16 +97,13 @@ class LocationsController extends Controller
         $currentUser = User::where('id',Auth::id())->first();
         $hasDevice = $currentUser->devices()->where('id',Auth::id())->exists();
         
-        if(!$hasDevice){
-            return Response::json(False);
+        if($currentUser->hasRole('peers')){
+            $user_device = User::with('devices')->where('id','=',$currentUser->parent_id)->first();
+            $dev_id =  $user_device->devices[0]->id;
         }else{
-            if ($currentUser->parent_id == null) {
-                $user_device = User::with('devices')->where('id','=',Auth::id())->first();
-                $dev_id =  $user_device->devices[0]->id;
-            }else{
-                $user_device = User::with('devices')->where('id','=',$currentUser->parent_id)->first();
-                $dev_id =  $user_device->devices[0]->id;
-            }
+            $user_device = User::with('devices')->where('id','=',Auth::id())->first();
+            $dev_id =  $user_device->devices[0]->id;
+        }
        
             $location = Location::where('device_id',$dev_id)->orderBy('created_at', 'desc')->get(['latitude','longitude'])->first();
             //dd($location);
@@ -116,9 +113,6 @@ class LocationsController extends Controller
                 return Response::json($location);
             }
         }
-
-        
-    }
 
     public function ride(){
         return view('Ride.ride');

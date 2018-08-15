@@ -39,7 +39,7 @@ class HomeController extends Controller
         }else if(Auth::user()->parent_id == null){
             return view('home');
         }else{
-            return view('Bike User.real-time-tracking');
+            return view('home');
         }
         
     }

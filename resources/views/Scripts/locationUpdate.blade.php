@@ -27,7 +27,7 @@ var map = new google.maps.Map(
           data: "",
           dataType: 'json',
           success: function(data){
-            //console.log($.trim(data));
+            console.log(data);
             if(!data){
                 infoWindow = new google.maps.InfoWindow;
                 // Try HTML5 geolocation.
@@ -65,6 +65,7 @@ var map = new google.maps.Map(
                 }
           }else{
             //console.log('HI');
+            console.log(data);
             var myLocation = {lat: data.latitude, lng: data.longitude};
             var marker = new google.maps.Marker({position: myLocation, map: map});
             markers.push(marker);

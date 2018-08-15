@@ -22,7 +22,11 @@
                 </div>
                 <!--end of col-->
                 <div class="col-12 col-md-3 mb-1 order-md-1">
-                    @include('Layouts.newSidebar')
+                    @role('bike_user')
+                        @include('Layouts.newSidebar')
+                    @else
+                    @endrole
+                    
                 </div>
                 <!--end of col-->
             </div>
@@ -56,6 +60,7 @@
 </div>
 
 @include('Scripts.locationUpdate')
+
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh_q1lR502bpk7MmTR0XZLTph53Ac9BUE&callback=initMap">
 </script> 
