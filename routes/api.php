@@ -35,12 +35,9 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('getPlaces','api\PlacesController@getAllPlaces');
     Route::post('DeviceHistory','api\HistoryController@historyDevice');
     Route::get('device','api\DeviceController@getDeviceFromUser');
+	Route::get('friend/autocomplete','api\FriendsController@friendsArray');
+    Route::post('user/search','api\FriendsController@search');
+    Route::post('friend/save','api\FriendsController@store');
 });
 
 Route::post('/leaveGroup','GroupsController@leaveGroup');
-
-Route::get('item', 'ItemController@index');
-Route::get('item/{id}', 'ItemController@show');
-Route::post('item', 'ItemController@store');
-Route::put('item/{id}', 'ItemController@update');
-Route::get('item/delete/{id}', 'ItemController@delete');

@@ -32,7 +32,7 @@
                 	@else
                 	
                 	<div class="row">
-                		<div class="col-md-9"><h5>List of Groups</h5></div>
+                		<div class="col-md-9"><h5>List of Friends</h5></div>
                 		<div class="col text-right"><a href="{{route('friends.requests')}}" class="btn btn-warning">All Friend Requests</a></div>
                 	</div>
                 	

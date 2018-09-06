@@ -29,22 +29,28 @@
                                     <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" readonly />
                                     <small>You have successfully added a device already</small>
                                     
+                                        <div class="form-group">
+                                                <button class="btn btn-secondary" name="addDev" id="deviceCode" disabled>Add Device</button>
+                                           
+                                        </div>
+                                    
                                 @else
                                     <input class="form-control form-control-lg" type="text" name="deviceCode" required id="code" />
                                     <small>Enter a code to add a device</small>
+                                      
+                                    <div class="form-group">
+                                            <button class="btn btn-secondary" name="addDev" id="deviceCode" >Add Device</button>
                                         
+                                    </div>
+                                                        
                                 @endif
                             
                         </div>
                     </div>
                     
 
-                    <div class="col-12">
-                    <div class="form-group">
-                            <button class="btn btn-secondary" name="saveInfo" id="deviceCode" >Add Device</button>
-                        </div>
-                    </div>
-
+                  <div class="col-12">
+    
 
                     @if($device)
                         <div class="col-6">

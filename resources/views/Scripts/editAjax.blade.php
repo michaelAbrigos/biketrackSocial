@@ -52,14 +52,14 @@ $(document).ready(function(){
         }
 
         var updateURL = '/device';
-        //console.log(gen);
+        console.log(formData);
         $.ajax({
             type: "POST",
             url: updateURL,
             data: formData,
             dataType: 'json',
             success: function (data) {
-    
+            
                 var options =  {
                     content: "Device Added!", // text of the snackbar
                     style: "toast", // add a custom class to your snackbar
@@ -72,6 +72,7 @@ $(document).ready(function(){
                 
             },
             error: function (data) {
+                console.log(data)
                 var options =  {
                     content: "Seems there  is a problem adding your device", // text of the snackbar
                     style: "toast", // add a custom class to your snackbar
@@ -217,5 +218,14 @@ $('input[name="bday"],input[name="address"],input[name="city"],input[name="zip_c
     }
 });
 
+
+$('input[name="code"]').change(function(){
+    if($(this).val()){
+        console.log($(this).val());
+        $('button[name="addDev"]').prop("disabled",false);
+    }else{
+        $('button[name="addDev"]').prop("disabled",true);
+    }
+});
 
 </script>

@@ -5,6 +5,7 @@ use Auth;
 use Response;
 use App\Device;
 use App\Device_user;
+use App\User;
 use App\Http\Requests\AddDevices;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -42,19 +43,17 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validated();
-        if($validated){
             $device = Device::with('users')->where('device_code','LIKE', $request->code)->first();
             //dd($device);        
-            if (count($device) == 1) {
+            if ($device) {
                 $device->users()->attach(Auth::id());
                 $curUser = User::find(Auth::id());
                 $curUser->givePermissionTo('Search History');
                 return Response::json($device);
             }else{
-                return false;
+                return Response::json(false,401);
             }
-        }
+        
     }
 
     /**

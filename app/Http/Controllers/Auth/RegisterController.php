@@ -71,7 +71,7 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('bike_user');
-        $user->givePermissionTo('Search History');
+        $user->givePermissionTo('View Map');
     
         $email = $data['email'];
         $username = $data['username'];

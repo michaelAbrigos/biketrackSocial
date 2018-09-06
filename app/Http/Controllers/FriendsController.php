@@ -32,7 +32,7 @@ class FriendsController extends Controller
     {
         $friend = new Friend;
         $friend->user_id = Auth::id();
-        $friend->friend_id = $request->f_id;
+        $friend->friend_id = $request->id;
         $friend->save();
 
         if ($friend) {

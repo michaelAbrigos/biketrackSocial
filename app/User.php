@@ -62,6 +62,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany('App\User','friends_users','user_id','friend_id')->with('information')->withPivot('confirmed')->where('confirmed',1);
     }
 
+
     public function friendsFromOther(){
         return $this->belongsToMany('App\User','friends_users','friend_id','user_id')->with('information')->withPivot('confirmed')->where('confirmed',1);
     }
