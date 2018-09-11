@@ -22,6 +22,15 @@ class FriendsController extends Controller
         $friend1 = Auth::user()->friends;
         $friend2 = $friend1->merge(Auth::user()->friendsFromOther);
         $friends = $friend2->pluck('information');
+        return Response::json(['users'=>$friends]);
+
+    }
+
+    public function friendsArrayList(){
+        
+        $friend1 = Auth::user()->friends;
+        $friend2 = $friend1->merge(Auth::user()->friendsFromOther);
+        $friends = $friend2->pluck('information');
         return Response::json($friends);
 
     }
@@ -57,10 +66,13 @@ class FriendsController extends Controller
         
     }
 
-    public function declineFriend($id){
-        $this->validate($request, ['token' => 'required']);
-        $ok = Auth::user()->friends()->detach($id);
-        return Response::json($ok);
+    public function declineFriend(Request $request){
+        $ok = Auth::user()->friendsRequests()->detach($request->id);
+        if($ok){
+            return Response::json([$ok],200);
+        }else{
+            return Response::json([$ok],500);
+        }
     }
 
     public function search(Request $request){
@@ -76,7 +88,7 @@ class FriendsController extends Controller
         $requested = $requested->modelKeys();
 
 
-        $users = User::with('information')->role('bike_user')->where('parent_id',0)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($request){
+        $users = User::role('bike_user')->where('parent_id',0)->where('id','<>',Auth::id())->wherehas('information', function ($q) use($request){
             $q->where('first_name','LIKE','%'.$request->search.'%')->orWhere('last_name','LIKE','%'.$request->search.'%')->orWhere('username','LIKE','%'.$request->search.'%');
         })->get();
 
@@ -84,12 +96,31 @@ class FriendsController extends Controller
         $users = $users->pluck('information');
         //$users = $users->pluck('last_name');
         
-        return Response::json(['users' => $users,'friends' => $friend2,'requests'=>$requests,'requested'=>$requested]);
+        return Response::json(['users' => $users,'friends'=>$friend2,'requests'=>$requests,'requested'=>$requested]);
     }
 
     public function FriendRequest(){
         $requests = Auth::user()->friendsRequests;
-        return Response::json(['request'=>$requests]);
+        $requests = $requests->pluck('information');
+        return Response::json(['users'=>$requests]);
+    }
+
+    public function confirmFriend(Request $request){
+
+        if($request->id){
+            $friend = Friend::where('friend_id',Auth::id())->where('user_id',$request->id)->first();
+            $friend->confirmed = 1;
+            $friend->save();
+            //$user = User::find(Auth::id());
+            if($friend){
+                return Response::json(['friend'=>$friend,200]);
+            }else{
+                return Response::json(['friend'=>$friend,500]);
+            }
+          
+        }else{
+            return Response::json(["false",402]);
+        }
     }
 
 }

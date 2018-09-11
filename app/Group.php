@@ -11,6 +11,6 @@ class Group extends Model
     }
 
     public function addGroupMembers(User $user){
-        $this->members()->attach($user->id);
+        return $this->members()->attach($user->id);
     }
 }

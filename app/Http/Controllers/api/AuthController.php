@@ -12,6 +12,8 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Validator, DB, Hash, Mail;
 use Illuminate\Support\Facades\Password;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Mail\Message;
 
 class AuthController extends Controller
@@ -192,11 +194,15 @@ class AuthController extends Controller
             'user_id' => Auth::id()
         ]);
 
+        $user = User::find(Auth::id());
+        $user->assignRole('bike_user');
+        $user->givePermissionTo('View Map');
+
         return response()->json(['success' => true, 'data'=> ['message'=> 'Account setup successful']],200);
     }
 
     public function checkExists(){
-        $user = User_info::find(Auth::id());
+        $user = User_info::where('user_id',Auth::id())->first();
         $currentUser = User::find(Auth::id());
         $hasDevice = $currentUser->devices()->where('id',Auth::id())->exists();
         

@@ -25,8 +25,10 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('saveLocationforHistory','api\HistoryController@saveHistoryForMobile');
     Route::post('deviceSave','api\DeviceController@storeCodeMobile');
     Route::post('friends','api\FriendsController@store');
+    Route::post('friendsAccept','api\FriendsController@confirmFriend');
     Route::delete('friends/{id}','api\FriendsController@destroy');
-    Route::post('declineFriend/{id}','api\FriendsController@declineFriend');
+    Route::get('friends/get','api\FriendsController@friendsArrayList');
+    Route::post('friendsDecline','api\FriendsController@declineFriend');
     Route::post('saveInformation','api\AuthController@informationSave');
     Route::get('friends','api\FriendsController@friendsArray');
     Route::get('checkInfo','api\AuthController@checkExists');
@@ -37,7 +39,14 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('device','api\DeviceController@getDeviceFromUser');
 	Route::get('friend/autocomplete','api\FriendsController@friendsArray');
     Route::post('user/search','api\FriendsController@search');
+    Route::post('groups','api\GroupsController@storeGroups');
+    Route::get('groups','api\GroupsController@getAllGroups');
+    Route::post('delGroup','api\GroupsController@deleteLatestGroup');
+    Route::post('deleteGroup','api\GroupsController@deleteGroup');
+    Route::post('groupMem','api\GroupsController@saveMembers');
     Route::post('friend/save','api\FriendsController@store');
+    Route::post('getGroupLocation','api\GroupsController@MemberLocations');
+    Route::get('friend/requests','api\FriendsController@FriendRequest');
 });
 
 Route::post('/leaveGroup','GroupsController@leaveGroup');
