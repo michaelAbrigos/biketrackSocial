@@ -63,6 +63,6 @@ class DeviceController extends Controller
         $device = Device::whereHas('users', function($q){
             $q->where('id',Auth::id());
         })->get();
-        return Response::json($device);     
+        return Response::json(['devices'=>$device],200);     
     }
 }
