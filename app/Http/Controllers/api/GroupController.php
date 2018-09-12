@@ -30,10 +30,9 @@ class GroupsController extends Controller
 
     public function saveMembers(Request $request){
         $g_id = Group::where('parent_id',Auth::id())->orderBy('created_at','desc')->pluck('id')->first();
-        
-        //$ids = array();
+
         foreach($request->member as $key => $membername){
-            $id = User_info::whereRaw("CONCAT(`first_name`,' ',`last_name`) =?",$membername)->pluck('id')->first();
+            $id = User_info::whereRaw("CONCAT(`first_name`,' ',`last_name`) =?",$membername)->pluck('user_id')->first();
             if($id){
                 $groupAdded = Group::find($g_id);
                 $groupAdded->members()->attach($id);
