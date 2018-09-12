@@ -113,4 +113,51 @@ class GroupsController extends Controller
         }
     }
 
+    public function AllMemberLocations(){
+        //get ID of group using POST request->id
+        $curGroup = Group::whereHas('members',function($q){
+            $q->where('user_id',Auth::id());
+        })->get();
+
+        $curGroup = $curGroup->pluck('id');
+        
+        $keys = Array();
+        //add in keys[] the id of all members of group
+        $groupId = Group::with('members')->whereIn('id',$curGroup)->get();
+        $groupMemberDetail = $groupId->pluck('members');
+        $groupMemberDetailId = $groupMemberDetail->pluck('id');
+        foreach($groupMemberDetail as $group){
+            foreach($group as $id){
+                $keys[] = $id->id;
+            }
+        }
+
+        $keys = array_unique($keys);
+
+        $information = User::with('information')->whereIn('id',$keys)->get();
+        $information = $information->pluck('information');
+
+        $devInfo = User::with('information')->whereHas('devices',function($q) use($keys){
+             $q->whereIn('id',$keys);
+         })->get();
+        $devInfo = $devInfo->pluck('information');
+
+        //return Response::json(['no'=>$user_noDevice]);
+        $user_noDevice = User::whereDoesntHave('devices')->whereIn('id',$keys)->pluck('id')->toArray();
+        $dev = User::has('devices')->whereIn('id',$keys)->pluck('id')->toArray();
+         $locations = Array();
+        foreach ($dev as $key => $id) {
+            $locations[] = Location::where('device_id',$id)->orderBy('created_at', 'desc')->get(['latitude','longitude','device_id'])->first()->toArray();
+        }
+        
+        $history = Array();
+        
+         foreach($user_noDevice as $id){
+             $history[] = History::where('user_id',$id)->orderBy('created_at', 'desc')->get(['latitude','longitude','user_id'])->first()->toArray();
+         }
+
+        // return Response::json(['location'=>$locations,'historys'=>$history,'information'=>$information,'deviceInfo'=>$devInfo]);       
+        return Response::json(['information'=>$information,'deviceInfo'=>$devInfo,'location'=>$locations,'historys'=>$history]);
+    }
+
 }

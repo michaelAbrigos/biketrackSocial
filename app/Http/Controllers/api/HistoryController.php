@@ -45,18 +45,8 @@ class HistoryController extends Controller
 
     public function rangeHistory(Request $request){
 
-        if($request->end == ""){
-            $location = History::whereHas('users',function($q){
-                $q->where('id',self::checkUserParent());
-            })->where('created_at','LIKE',$request->start)->get();
-        }elseif($request->has('start') && $request->has('end')){
-            $location = History::whereHas('users',function($q){
-                $q->where('id',self::checkUserParent());
-            })->whereBetween('created_at',[$request->start,$request->end])->get();
-        }else{
-            return Response::json($request->end,422);
-        }
-        
+        $location = History::where('user_id',Auth::id())->whereBetween('created_at',[$request->start,$request->end])->get();
+
         return Response::json(['location'=>$location],200);
     }
 

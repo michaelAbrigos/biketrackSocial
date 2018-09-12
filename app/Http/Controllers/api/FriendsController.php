@@ -54,14 +54,14 @@ class FriendsController extends Controller
         
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $ok = Auth::user()->friends()->detach($id);
+        $ok = Auth::user()->friends()->detach($request->id);
         if($ok == 0){
             $unfriend = Auth::user()->friendsFromOther()->detach($id);
-            return Response::json($unfriend);
+            return Response::json($unfriend,200);
         }else{
-            return Response::json($ok);
+            return Response::json($ok,500);
         }
         
     }
@@ -119,7 +119,7 @@ class FriendsController extends Controller
             }
           
         }else{
-            return Response::json(["false",402]);
+            return Response::json(["false",500]);
         }
     }
 

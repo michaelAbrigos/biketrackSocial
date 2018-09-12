@@ -26,7 +26,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('deviceSave','api\DeviceController@storeCodeMobile');
     Route::post('friends','api\FriendsController@store');
     Route::post('friendsAccept','api\FriendsController@confirmFriend');
-    Route::delete('friends/{id}','api\FriendsController@destroy');
+    Route::post('deleteFriend','api\FriendsController@destroy');
     Route::get('friends/get','api\FriendsController@friendsArrayList');
     Route::post('friendsDecline','api\FriendsController@declineFriend');
     Route::post('saveInformation','api\AuthController@informationSave');
@@ -46,6 +46,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('groupMem','api\GroupsController@saveMembers');
     Route::post('friend/save','api\FriendsController@store');
     Route::post('getGroupLocation','api\GroupsController@MemberLocations');
+    Route::get('getAll','api\GroupsController@AllMemberLocations');
     Route::get('friend/requests','api\FriendsController@FriendRequest');
 });
 

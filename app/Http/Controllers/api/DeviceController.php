@@ -19,8 +19,7 @@ class DeviceController extends Controller
     
     public function storeCodeMobile(Request $request)
     {
-        $this->validate($request, ['token' => 'required']);
-            $device = Device::with('users')->where('device_code','LIKE', $request->code)->first();
+            $device = Device::with('users')->where('device_code','LIKE', $request->code)->firstOrFail();
             //dd($device);        
             if ($device) {
                 $device->users()->attach(Auth::id());
