@@ -42,7 +42,7 @@ class AuthController extends Controller
         $username = $request->username;
         $email = $request->email;
         $password = $request->password;
-        
+
         $user = User::create(['username' => $username, 'email' => $email, 'password' => Hash::make($password)]);
         $user->givePermissionTo('View Map');
 
@@ -51,11 +51,18 @@ class AuthController extends Controller
         $subject = "Please verify your email address.";
         Mail::send('email.verify', ['username' => $username, 'verification_code' => $verification_code],
             function($mail) use ($email, $username, $subject){
-                $mail->from(getenv('FROM_EMAIL_ADDRESS'), "biketrack@gmail.com");
+                $mail->from(getenv('FROM_EMAIL_ADDRESS'), "admin@bt-social.com");
                 $mail->to($email, $username);
                 $mail->subject($subject);
             });
-        return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.'],200);
+
+        if(count(Mail::failures())>0){
+            return response()->json(['success'=> false, 'message'=> 'Failed to create account, please check internet connection'],500);              
+        }else{
+            return response()->json(['success'=> true, 'message'=> 'Thanks for signing up! Please check your email to complete your registration.'],200);  
+        }
+
+        
     }
     public function showRegistrationForm()
     {

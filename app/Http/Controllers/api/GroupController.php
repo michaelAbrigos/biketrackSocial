@@ -10,6 +10,7 @@ use Response;
 use App\Group;
 use App\Location;
 use App\User;
+use App\History;
 use App\User_info;
 
 
@@ -61,7 +62,7 @@ class GroupsController extends Controller
         //return Response::json(['no'=>$user_noDevice]);
         $user_noDevice = User::whereDoesntHave('devices')->whereIn('id',$keys)->pluck('id')->toArray();
         $dev = User::has('devices')->whereIn('id',$keys)->pluck('id')->toArray();
-
+        $locations = Array();
         foreach ($dev as $key => $id) {
             $locations[] = Location::where('device_id',$id)->orderBy('created_at', 'desc')->get(['latitude','longitude','device_id'])->first()->toArray();
         }
