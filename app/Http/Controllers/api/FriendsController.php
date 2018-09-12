@@ -38,7 +38,6 @@ class FriendsController extends Controller
 
     public function store(Request $request)
     {
-      
         $friend = new Friend;
         $friend->user_id = Auth::id();
         $friend->friend_id = $request->id;

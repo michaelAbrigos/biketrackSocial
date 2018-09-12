@@ -46,7 +46,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::post('groupMem','api\GroupsController@saveMembers');
     Route::post('friend/save','api\FriendsController@store');
     Route::post('getGroupLocation','api\GroupsController@MemberLocations');
-    Route::get('getAll','api\GroupsController@AllMemberLocations');
+    Route::post('getAll','api\GroupsController@AllMemberLocations');
     Route::get('friend/requests','api\FriendsController@FriendRequest');
 });
 
