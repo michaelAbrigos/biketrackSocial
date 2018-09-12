@@ -58,6 +58,14 @@ class GroupsController extends Controller
             $keys[] = $member->id;
         }
 
+        $information = User::with('information')->whereIn('id',$keys)->get();
+        $information = $information->pluck('information');
+
+        $devInfo = User::with('information')->whereHas('devices',function($q) use($keys){
+            $q->whereIn('id',$keys);
+        })->get();
+        $devInfo = $devInfo->pluck('information');
+
         //return Response::json(['no'=>$user_noDevice]);
         $user_noDevice = User::whereDoesntHave('devices')->whereIn('id',$keys)->pluck('id')->toArray();
         $dev = User::has('devices')->whereIn('id',$keys)->pluck('id')->toArray();
@@ -72,7 +80,7 @@ class GroupsController extends Controller
             $history[] = History::where('user_id',$id)->orderBy('created_at', 'desc')->get(['latitude','longitude','user_id'])->first()->toArray();
         }
 
-        return Response::json(['location'=>$locations,'historys'=>$history]);       
+        return Response::json(['location'=>$locations,'historys'=>$history,'information'=>$information,'deviceInfo'=>$devInfo]);       
 
     }
 
